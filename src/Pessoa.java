@@ -1,3 +1,9 @@
+enum NivelAcesso {
+	ADMINISTRADOR,
+	EDITOR,
+	LEITOR
+}
+
 public class Pessoa {
 	private int idPessoa;
 	private String nome;
@@ -6,11 +12,10 @@ public class Pessoa {
 	private String endereco;
 	private String telefone;
 	private String email;
-	private String nivelAcesso;
+	private NivelAcesso nivelAcesso;
 
-	// Construtor da classe Pessoa
 	public Pessoa(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
-			String nivelAcesso) {
+			NivelAcesso nivelAcesso) {
 		this.idPessoa = idPessoa;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -78,11 +83,11 @@ public class Pessoa {
 		this.email = email;
 	}
 
-	public String getNivelAcesso() {
+	public NivelAcesso getNivelAcesso() {
 		return nivelAcesso;
 	}
 
-	public void setNivelAcesso(String nivelAcesso) {
+	public void setNivelAcesso(NivelAcesso nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
 	}
 }

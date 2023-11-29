@@ -1,14 +1,12 @@
 public class Paciente extends Pessoa {
-	// Atributos adicionais específicos para a classe Paciente
 	private String dataNascimento;
-	private String genero; // Pode ser representado como 'M', 'F', etc.
+	private String genero;
 	private String tipoSanguineo;
-	private String fumante; // Pode ser representado como 'S' para sim ou 'N' para não
+	private Boolean fumante;
 
-	// Construtor da classe Paciente
 	public Paciente(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
-			String nivelAcesso,
-			String dataNascimento, String genero, String tipoSanguineo, String fumante) {
+			NivelAcesso nivelAcesso,
+			String dataNascimento, String genero, String tipoSanguineo, Boolean fumante) {
 		super(idPessoa, nome, cpf, rg, endereco, telefone, email, nivelAcesso);
 
 		this.dataNascimento = dataNascimento;
@@ -17,7 +15,6 @@ public class Paciente extends Pessoa {
 		this.fumante = fumante;
 	}
 
-	// Métodos getters e setters para os novos atributos
 	public String getDataNascimento() {
 		return dataNascimento;
 	}
@@ -42,11 +39,11 @@ public class Paciente extends Pessoa {
 		this.tipoSanguineo = tipoSanguineo;
 	}
 
-	public String getFumante() {
+	public Boolean getFumante() {
 		return fumante;
 	}
 
-	public void setFumante(String fumante) {
+	public void setFumante(Boolean fumante) {
 		this.fumante = fumante;
 	}
 
