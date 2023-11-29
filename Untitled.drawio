@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-29T11:57:21.444Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="wbZ-l9vH7K2OtAFYf56B" version="22.1.4" type="google">
+<mxfile host="app.diagrams.net" modified="2023-11-29T20:38:19.109Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="_-uSgWp8bbN3LGSdZtJw" version="22.1.4" type="google">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1499" dy="629" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -243,7 +243,7 @@
         <mxCell id="rk1HslSdFWzbcpd7X6hm-110" value="T_PRODUTO" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
           <mxGeometry x="10" y="330" width="187" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="rk1HslSdFWzbcpd7X6hm-111" value="P  *id_produto: int&#xa;     *nm_produto: String&#xa;     *vl_produto: double&#xa;      vl_desconto: double" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="rk1HslSdFWzbcpd7X6hm-110" vertex="1">
+        <mxCell id="rk1HslSdFWzbcpd7X6hm-111" value="P  *id_produto: int&#xa;     *nm_produto: String&#xa;     *ds_produto: String&#xa;     *vl_produto: double&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="rk1HslSdFWzbcpd7X6hm-110" vertex="1">
           <mxGeometry y="30" width="187" height="70" as="geometry" />
         </mxCell>
         <mxCell id="rk1HslSdFWzbcpd7X6hm-114" value="T_CARTÃO_CRÉDITO" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
@@ -255,7 +255,7 @@
         <mxCell id="rk1HslSdFWzbcpd7X6hm-116" value="T_PEDIDO" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;" parent="1" vertex="1">
           <mxGeometry x="257" y="240" width="160" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="rk1HslSdFWzbcpd7X6hm-117" value="P  *id_pedido: int&#xa;F   *id_paciente: int&#xa;F   *id_cartão: int&#xa;F   *id_produto: int&#xa;     *dt_pedido: LocalDate&#xa;     *nr_hora: LocalTime&#xa;     *st_pedido: String&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="rk1HslSdFWzbcpd7X6hm-116" vertex="1">
+        <mxCell id="rk1HslSdFWzbcpd7X6hm-117" value="P  *id_pedido: int&#xa;F   *id_paciente: int&#xa;F   *id_cartão: int&#xa;F   *id_produto: int&#xa;     *dt_pedido: LocalDate&#xa;     *nr_hora: LocalTime&#xa;     *st_pedido: &lt;&lt;enum&gt;&gt;&#xa;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;" parent="rk1HslSdFWzbcpd7X6hm-116" vertex="1">
           <mxGeometry y="30" width="160" height="110" as="geometry" />
         </mxCell>
         <mxCell id="rk1HslSdFWzbcpd7X6hm-118" value="" style="line;strokeWidth=1;rotatable=0;dashed=0;labelPosition=right;align=left;verticalAlign=middle;spacingTop=0;spacingLeft=6;points=[];portConstraint=eastwest;" parent="1" vertex="1">
