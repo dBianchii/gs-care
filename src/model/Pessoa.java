@@ -1,3 +1,4 @@
+package model;
 enum NivelAcesso {
 	ADMINISTRADOR,
 	EDITOR,

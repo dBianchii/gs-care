@@ -1,3 +1,4 @@
+package model;
 import java.util.ArrayList;
 
 public class Produto {
@@ -50,9 +51,9 @@ public class Produto {
 	}
 
 	public static void criaProdutos() {
-		new Produto("Cuidado Essencial", "plano mensal para 1 paciente com até 2 cuidadores", 29.90);
-		new Produto("Mais Cuidado", "plano mensal para 1 paciente com até 5 cuidadores", 49.90);
-		new Produto("Cuidado Total", "plano mensal para 1 paciente com 6 ou mais cuidadores", 89.90);
+		new Produto("Cuidado Essencial", "Plano mensal para 1 paciente com até 2 cuidadores", 29.90);
+		new Produto("Cuidado Premium", "Plano mensal para 1 paciente com até 5 cuidadores", 49.90);
+		new Produto("Cuidado Total", "Plano mensal para 1 paciente com 6 ou mais cuidadores", 89.90);
 	}
 
 	@Override

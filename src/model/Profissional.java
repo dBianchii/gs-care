@@ -1,3 +1,4 @@
+package model;
 public class Profissional extends Pessoa {
 	private int idProfissional;
 	// private int idCuidador;

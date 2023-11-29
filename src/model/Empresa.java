@@ -1,3 +1,4 @@
+package model;
 public class Empresa {
 	private int idEmpresa; // chave primária
 	private String cnpj;

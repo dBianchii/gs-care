@@ -1,3 +1,4 @@
+package model;
 public class Cuidador extends Pessoa {
 	// chave primária?
 	

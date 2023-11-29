@@ -1,3 +1,4 @@
+package model;
 enum GrauParentesco {
 	PAI,
 	MAE,
