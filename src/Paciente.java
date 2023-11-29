@@ -1,3 +1,5 @@
+import java.util.Date;
+
 enum TipoSanguineo {
 	A_POSITIVO,
 	A_NEGATIVO,
@@ -10,14 +12,14 @@ enum TipoSanguineo {
 }
 
 public class Paciente extends Pessoa {
-	private String dataNascimento;
+	private Date dataNascimento;
 	private String genero;
 	private TipoSanguineo tipoSanguineo;
 	private Boolean fumante;
 
 	public Paciente(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
 			NivelAcesso nivelAcesso,
-			String dataNascimento, String genero, TipoSanguineo tipoSanguineo, Boolean fumante) {
+			Date dataNascimento, String genero, TipoSanguineo tipoSanguineo, Boolean fumante) {
 		super(idPessoa, nome, cpf, rg, endereco, telefone, email, nivelAcesso);
 
 		this.dataNascimento = dataNascimento;
@@ -26,11 +28,11 @@ public class Paciente extends Pessoa {
 		this.fumante = fumante;
 	}
 
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
