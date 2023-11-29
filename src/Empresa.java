@@ -1,5 +1,5 @@
 public class Empresa {
-	private int idEmpresa;
+	private int idEmpresa; // chave primária
 	private String cnpj;
 	private String razaoSocial;
 	private String nomeFantasia;

@@ -8,11 +8,10 @@ enum TipoRotina {
 }
 
 public class Rotina extends Evento {
-	private int idRotina;
+	private int idRotina; // chave primária
 	private TipoRotina tipo;
 
-	public Rotina(int idEvento, String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim, String status,
-			int idRotina, TipoRotina tipo) {
+	public Rotina(int idEvento, String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim, StatusEvento status, int idRotina, TipoRotina tipo) {
 		super(idEvento, titulo, data, horaInicio, horaFim, status);
 		this.idRotina = idRotina;
 		this.tipo = tipo;

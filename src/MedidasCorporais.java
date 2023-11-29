@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MedidasCorporais extends Registro {
+	// chave primária ?
 	private double peso;
 	private double altura;
 

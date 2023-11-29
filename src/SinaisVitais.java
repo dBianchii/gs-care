@@ -2,16 +2,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SinaisVitais extends Registro {
-	private double indice;
+	private double indice; // chave primária
 	private double temperatura;
 	private int saturacao;
-	private double pressaoArterial;
+	private String pressaoArterial; // ex.: 120/80
 	private int frequenciaCardiaca;
 	private int frequenciaRespiratoria;
 	private double glicemia;
 
 	public SinaisVitais(int idRegistro, LocalDate data, LocalTime hora,
-			double indice, double temperatura, int saturacao, double pressaoArterial,
+			double indice, double temperatura, int saturacao, String pressaoArterial,
 			int frequenciaCardiaca, int frequenciaRespiratoria, double glicemia) {
 		super(idRegistro, data, hora);
 
@@ -48,11 +48,11 @@ public class SinaisVitais extends Registro {
 		this.saturacao = saturacao;
 	}
 
-	public double getPressaoArterial() {
+	public String getPressaoArterial() {
 		return pressaoArterial;
 	}
 
-	public void setPressaoArterial(double pressaoArterial) {
+	public void setPressaoArterial(String pressaoArterial) {
 		this.pressaoArterial = pressaoArterial;
 	}
 

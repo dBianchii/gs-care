@@ -1,15 +1,21 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+enum StatusEvento {
+	AGENDADO,
+	REALIZADO,
+	CANCELADO
+}
+
 public class Evento {
-	private int idEvento;
+	private int idEvento; // chave primária
 	private String titulo;
 	private LocalDate data;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
-	private String status; // TODO: pode ser enum?
+	private StatusEvento status; 
 
-	public Evento(int idEvento, String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim, String status) {
+	public Evento(int idEvento, String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim, StatusEvento status) {
 		this.idEvento = idEvento;
 		this.titulo = titulo;
 		this.data = data;
@@ -58,11 +64,11 @@ public class Evento {
 		this.horaFim = horaFim;
 	}
 
-	public String getStatus() {
+	public StatusEvento getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(StatusEvento status) {
 		this.status = status;
 	}
 

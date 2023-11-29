@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Registro {
-	private int idRegistro;
+	private int idRegistro; // chave primária
 	private LocalDate data;
 	private LocalTime hora;
 

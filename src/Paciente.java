@@ -18,6 +18,7 @@ enum Genero {
 }
 
 public class Paciente extends Pessoa {
+	// chave primária?
 	private LocalDate dataNascimento;
 	private Genero genero;
 	private TipoSanguineo tipoSanguineo;

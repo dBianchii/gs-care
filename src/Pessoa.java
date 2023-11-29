@@ -5,11 +5,11 @@ enum NivelAcesso {
 }
 
 public class Pessoa {
-	private int idPessoa;
+	private int idPessoa; // chave primária
 	private String nome;
 	private String cpf;
 	private String rg;
-	private String endereco;
+	private String endereco; // tipo Endereco ou tipo int ?
 	private String telefone;
 	private String email;
 	private NivelAcesso nivelAcesso;

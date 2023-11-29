@@ -15,6 +15,7 @@ enum GrauParentesco {
 }
 
 public class Familiar extends Cuidador {
+	// chave primária?
 	private GrauParentesco grauParentesco;
 
 	public Familiar(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
