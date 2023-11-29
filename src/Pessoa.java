@@ -26,7 +26,6 @@ public class Pessoa {
 		this.nivelAcesso = nivelAcesso;
 	}
 
-	// Métodos getters e setters para cada atributo
 	public int getIdPessoa() {
 		return idPessoa;
 	}

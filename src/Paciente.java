@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 enum TipoSanguineo {
 	A_POSITIVO,
@@ -11,15 +11,21 @@ enum TipoSanguineo {
 	O_NEGATIVO
 }
 
+enum Genero {
+	MASCULINO,
+	FEMININO,
+	OUTRO
+}
+
 public class Paciente extends Pessoa {
-	private Date dataNascimento;
-	private String genero;
+	private LocalDate dataNascimento;
+	private Genero genero;
 	private TipoSanguineo tipoSanguineo;
 	private Boolean fumante;
 
 	public Paciente(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
 			NivelAcesso nivelAcesso,
-			Date dataNascimento, String genero, TipoSanguineo tipoSanguineo, Boolean fumante) {
+			LocalDate dataNascimento, Genero genero, TipoSanguineo tipoSanguineo, Boolean fumante) {
 		super(idPessoa, nome, cpf, rg, endereco, telefone, email, nivelAcesso);
 
 		this.dataNascimento = dataNascimento;
@@ -28,19 +34,19 @@ public class Paciente extends Pessoa {
 		this.fumante = fumante;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getGenero() {
+	public Genero getGenero() {
 		return genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
 
