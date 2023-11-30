@@ -134,8 +134,21 @@ public class App {
 		sc.close();
 	}
 
+	// método para visualizar os cartões de crédito cadastrados
+	public void visualizarCartoesCadastrados() {
+		System.out.println("5. Visualizar Cartões de Crédito Cadastrados: \n");
+		if (cartoes.size() == 0) {
+			System.out.println("Você ainda não cadastrou nenhum cartão de crédito.");
+		} else {
+			for (CartaoCredito cartao : cartoes) {
+				System.out.println("\s\s " + cartao);
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		App app = new App();
 		app.inserirCartaoCredito();
+		app.visualizarCartoesCadastrados();
 	}
 }

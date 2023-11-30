@@ -106,7 +106,7 @@ public class CartaoCredito {
 
 	// Método que verifica se o cvv do cartão de crédito é válido
 	public static boolean verificaCvv(int cvv) {
-		return cvv >= 100 && cvv <= 999;
+		return cvv >= 000 && cvv <= 999;
 	}
 
 	// Método toString para impressão de dados (sobrescrito do método toString da classe Object)
