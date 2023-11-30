@@ -25,10 +25,10 @@ public class Paciente extends Pessoa {
 	private TipoSanguineo tipoSanguineo;
 	private Boolean fumante;
 
-	public Paciente(String nome, String cpf, String rg, String endereco, String telefone, String email,
+	public Paciente(String nome, String cpf, String rg, int idEndereco, String telefone, String email,
 			NivelAcesso nivelAcesso,
 			LocalDate dataNascimento, Genero genero, TipoSanguineo tipoSanguineo, Boolean fumante) {
-		super(nome, cpf, rg, endereco, telefone, email, nivelAcesso);
+		super(nome, cpf, rg, idEndereco, telefone, email, nivelAcesso);
 
 		this.dataNascimento = dataNascimento;
 		this.genero = genero;

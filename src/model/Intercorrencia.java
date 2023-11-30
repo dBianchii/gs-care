@@ -12,23 +12,23 @@ enum TipoIntercorrencia {
 }
 
 public class Intercorrencia extends Registro {
-	private TipoIntercorrencia tipoIntercorrencia;
+	private TipoIntercorrencia tipo;
 	private String observacao;
 
-	public Intercorrencia(LocalDate data, LocalTime hora, TipoIntercorrencia tipoIntercorencia,
+	public Intercorrencia(LocalDate data, LocalTime hora, TipoIntercorrencia tipo,
 			String observacao, int idPaciente) {
 
 		super(data, hora, idPaciente);
-		this.tipoIntercorrencia = tipoIntercorencia;
+		this.tipo = tipo;
 		this.observacao = observacao;
 	}
 
 	public TipoIntercorrencia getTipoIntercorencia() {
-		return tipoIntercorrencia;
+		return tipo;
 	}
 
-	public void setTipoIntercorencia(TipoIntercorrencia tipoIntercorencia) {
-		this.tipoIntercorrencia = tipoIntercorencia;
+	public void setTipoIntercorencia(TipoIntercorrencia tipo) {
+		this.tipo = tipo;
 	}
 
 	public String getObservacao() {

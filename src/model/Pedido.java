@@ -22,7 +22,6 @@ public class Pedido {
 
 	public Pedido(int idCartao, int idProduto, int idPaciente) {
 		this.id = contador++;
-
 		this.idPaciente = idPaciente;
 		this.idCartao = idCartao;
 		this.idProduto = idProduto;

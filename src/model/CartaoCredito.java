@@ -92,12 +92,6 @@ public class CartaoCredito {
 		return cvv >= 100 && cvv <= 999;
 	}
 
-	public static void criaCartoes() {
-		new CartaoCredito("0000999911118468", "Mariana Macêdo", "8", "2030", 787);
-		new CartaoCredito("0076499911110398", "Rafael Braga", "6", "2027", 500);
-		new CartaoCredito("0110997451168668", "Rodrigo Diego", "5", "2032", 172);
-	}
-
 	@Override
 	public String toString() {
 		return "CartaoCredito [idCartaoCredito=" + id + ", numero=" + numero + ", nomeTitular="

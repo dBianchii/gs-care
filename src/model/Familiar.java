@@ -19,10 +19,8 @@ enum GrauParentesco {
 public class Familiar extends Cuidador {
 	private GrauParentesco grauParentesco;
 
-	public Familiar(String nome, String cpf, String rg, String endereco, String telefone, String email,
-			NivelAcesso nivelAcesso,
-			GrauParentesco grauParentesco, int idPaciente) {
-		super(nome, cpf, rg, endereco, telefone, email, nivelAcesso, idPaciente);
+	public Familiar(String nome, String cpf, String rg, int idEndereco, String telefone, String email, NivelAcesso nivelAcesso, GrauParentesco grauParentesco, int idPaciente) {
+		super(nome, cpf, rg, idEndereco, telefone, email, nivelAcesso, idPaciente);
 
 		this.grauParentesco = grauParentesco;
 	}

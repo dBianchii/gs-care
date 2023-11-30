@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SinaisVitais extends Registro {
-	private double indice; // ? O que é indice?
 	private double temperatura;
 	private int saturacao;
 	private String pressaoArterial; // ex.: 120/80
@@ -18,21 +17,12 @@ public class SinaisVitais extends Registro {
 
 		super(data, hora, idPaciente);
 
-		this.indice = indice;
 		this.temperatura = temperatura;
 		this.saturacao = saturacao;
 		this.pressaoArterial = pressaoArterial;
 		this.frequenciaCardiaca = frequenciaCardiaca;
 		this.frequenciaRespiratoria = frequenciaRespiratoria;
 		this.glicemia = glicemia;
-	}
-
-	public double getIndice() {
-		return indice;
-	}
-
-	public void setIndice(double indice) {
-		this.indice = indice;
 	}
 
 	public double getTemperatura() {

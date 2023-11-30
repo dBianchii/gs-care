@@ -9,21 +9,20 @@ enum NivelAcesso {
 public class Pessoa {
 	private static int contador = 0;
 	private int id;
+	private int idEndereco;
 	private String nome;
 	private String cpf;
 	private String rg;
-	private String endereco;
 	private String telefone;
 	private String email;
 	private NivelAcesso nivelAcesso;
 
-	public Pessoa(String nome, String cpf, String rg, String endereco, String telefone, String email,
-			NivelAcesso nivelAcesso) {
+	public Pessoa(String nome, String cpf, String rg, int idEndereco, String telefone, String email, NivelAcesso nivelAcesso) {
 		this.id = contador++;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.rg = rg;
-		this.endereco = endereco;
+		this.idEndereco = idEndereco;
 		this.telefone = telefone;
 		this.email = email;
 		this.nivelAcesso = nivelAcesso;
@@ -61,12 +60,12 @@ public class Pessoa {
 		this.rg = rg;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public int getIdEndereco() {
+		return idEndereco;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setIdEndereco(int endereco) {
+		this.idEndereco = endereco;
 	}
 
 	public String getTelefone() {
