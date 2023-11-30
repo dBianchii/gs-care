@@ -1,54 +1,28 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CartaoCredito {
 	private static int contador = 0;
-	private static ArrayList<CartaoCredito> cartoes = new ArrayList<CartaoCredito>();
-	private int idCartaoCredito; // chave primária
+	private int id;
 	private String numero;
 	private String nomeTitular;
 	private String validadeMes;
 	private String validadeAno;
 	private int cvv;
 
-	public CartaoCredito() {
-		this.idCartaoCredito = contador;
-		contador++;
-	}
-
 	public CartaoCredito(String numero, String nomeTitular, String validadeMes, String validadeAno, int cvv) {
-		this.idCartaoCredito = contador;
-		contador++;
+		this.id = contador++;
+
 		this.numero = numero;
 		this.nomeTitular = nomeTitular;
 		this.validadeMes = validadeMes;
 		this.validadeAno = validadeAno;
 		this.cvv = cvv;
-		cartoes.add(this);
 	}
 
-	public static ArrayList<CartaoCredito> getCartoes() {
-		return cartoes;
-	}
-
-	public static void apagaCartao(int idCartaoCredito) {
-		if (cartoes.size() == 0) {
-			System.out.println("Não há cartões cadastrados.");
-		} else if (idCartaoCredito < 0 || idCartaoCredito >= cartoes.size()) {
-			System.out.println("O identificador do cartão não existe.");
-		} else {
-			for (int i = 0; i < cartoes.size(); i++) {
-				if (cartoes.get(i).getIdCartaoCredito() == idCartaoCredito) {
-					cartoes.remove(i);
-				}
-			}
-		}
-	}
-
-	public int getIdCartaoCredito() {
-		return idCartaoCredito;
+	public int getId() {
+		return id;
 	}
 
 	public String getNumero() {
@@ -84,7 +58,7 @@ public class CartaoCredito {
 	}
 
 	public boolean verificaMes(String validadeMes) {
-		return validadeMes.length() == 2 
+		return validadeMes.length() == 2
 				&& validadeMes.matches("[0-9]+")
 				&& Integer.parseInt(validadeMes) >= 1
 				&& Integer.parseInt(validadeMes) <= 12;
@@ -126,16 +100,8 @@ public class CartaoCredito {
 
 	@Override
 	public String toString() {
-		return "CartaoCredito [idCartaoCredito=" + idCartaoCredito + ", numero=" + numero + ", nomeTitular="
+		return "CartaoCredito [idCartaoCredito=" + id + ", numero=" + numero + ", nomeTitular="
 				+ nomeTitular + ", validadeMes=" + validadeMes + ", validadeAno=" + validadeAno + ", cvv=" + cvv + "]";
-	}
-
-	public static void main(String[] args) {
-		CartaoCredito.criaCartoes();
-
-		for (CartaoCredito cartao : CartaoCredito.getCartoes()) {
-			System.out.println(cartao);
-		}
 	}
 
 }

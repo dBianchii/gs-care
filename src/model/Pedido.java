@@ -1,35 +1,31 @@
 package model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 enum StatusPedido {
-	AGUARDANDO_PAGAMENTO, 
-	PAGAMENTO_APROVADO, 
-	AGAMENTO_RECUSADO, 
+	AGUARDANDO_PAGAMENTO,
+	PAGAMENTO_APROVADO,
+	AGAMENTO_RECUSADO,
 	CANCELADO;
 }
 
 public class Pedido {
 	private static int contador = 0;
-	private static ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
-	private int idPedido;
-	private int idPaciente = 1; // a aplicação só possui 1 Paciente por Produto
+	private int id;
+	private int idPaciente;
 	private int idCartao;
-	private int idProduto; // escolhido ao contratar o serviço; pode ser 0, 1 ou 2
-	private LocalDate data;
-	private LocalTime hora;
-	private StatusPedido status;
+	private int idProduto;
+	private LocalDate data = LocalDate.now();
+	private LocalTime hora = LocalTime.now();;
+	private StatusPedido status = StatusPedido.AGUARDANDO_PAGAMENTO;
 
-	public Pedido(int idCartao, int idProduto) {
-		this.idPedido = contador;
-		contador++;
+	public Pedido(int idCartao, int idProduto, int idPaciente) {
+		this.id = contador++;
+
+		this.idPaciente = idPaciente;
 		this.idCartao = idCartao;
 		this.idProduto = idProduto;
-		this.data = LocalDate.now();
-		this.hora = LocalTime.now();
-		this.status = StatusPedido.AGUARDANDO_PAGAMENTO;
-		pedidos.add(this);
 	}
 
 	public static int getContador() {
@@ -40,36 +36,36 @@ public class Pedido {
 		Pedido.contador = contador;
 	}
 
-	public int getIdPedido() {
-		return idPedido;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdPedido(int idPedido) {
-		this.idPedido = idPedido;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getIdPaciente() {
 		return idPaciente;
 	}
 
-	public void setIdPaciente(int idPaciente) {
-		this.idPaciente = idPaciente;
+	public void setIdPaciente(int id) {
+		this.idPaciente = id;
 	}
 
 	public int getIdCartao() {
 		return idCartao;
 	}
 
-	public void setIdCartao(int idCartao) {
-		this.idCartao = idCartao;
+	public void setIdCartao(int id) {
+		this.idCartao = id;
 	}
 
 	public int getIdProduto() {
 		return idProduto;
 	}
 
-	public void setIdProduto(int idProduto) {
-		this.idProduto = idProduto;
+	public void setIdProduto(int id) {
+		this.idProduto = id;
 	}
 
 	public LocalDate getData() {
@@ -98,18 +94,7 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return "Pedido [idPedido=" + idPedido + ", idPaciente=" + idPaciente + ", idCartao=" + idCartao + ", idProduto=" + idProduto + ", data=" + data + ", hora=" + hora + ", status=" + status + "]";
-	}
-
-	public static void main(String[] args) {
-		CartaoCredito.criaCartoes();
-		Produto.criaProdutos();
-
-		new Pedido(1, 2);
-		new Pedido(3, 2);
-
-		for (Pedido pedido : pedidos) {
-			System.out.println(pedido);
-		}
+		return "Pedido [idPedido=" + id + ", idPaciente=" + idPaciente + ", idCartao=" + idCartao + ", idProduto="
+				+ idProduto + ", data=" + data + ", hora=" + hora + ", status=" + status + "]";
 	}
 }

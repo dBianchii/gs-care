@@ -1,25 +1,27 @@
 package model;
+
 public class Empresa {
-	private int idEmpresa; // chave primária
+	private static int contador = 0;
+	private int id;
 	private String cnpj;
 	private String razaoSocial;
 	private String nomeFantasia;
 	private String inscricaoEstadual;
 
 	public Empresa(int idEmpresa, String cnpj, String razaoSocial, String nomeFantasia, String inscricaoEstadual) {
-		this.idEmpresa = idEmpresa;
+		this.id = contador++;
 		this.cnpj = cnpj;
 		this.razaoSocial = razaoSocial;
 		this.nomeFantasia = nomeFantasia;
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
-	public int getIdEmpresa() {
-		return idEmpresa;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdEmpresa(int idEmpresa) {
-		this.idEmpresa = idEmpresa;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getCnpj() {

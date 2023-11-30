@@ -1,15 +1,15 @@
 package model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class MedidasCorporais extends Registro {
-	// chave primária ?
 	private double peso;
 	private double altura;
 
-	public MedidasCorporais(int idRegistro, LocalDate data, LocalTime hora,
-			double peso, double altura) {
-		super(idRegistro, data, hora);
+	public MedidasCorporais(LocalDate data, LocalTime hora,
+			double peso, double altura, int idPaciente) {
+		super(data, hora, idPaciente);
 		this.peso = peso;
 		this.altura = altura;
 	}

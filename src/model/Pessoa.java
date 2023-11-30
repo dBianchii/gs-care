@@ -1,4 +1,5 @@
 package model;
+
 enum NivelAcesso {
 	ADMINISTRADOR,
 	EDITOR,
@@ -6,18 +7,19 @@ enum NivelAcesso {
 }
 
 public class Pessoa {
-	private int idPessoa; // chave primária
+	private static int contador = 0;
+	private int id;
 	private String nome;
 	private String cpf;
 	private String rg;
-	private String endereco; // tipo Endereco ou tipo int ?
+	private String endereco;
 	private String telefone;
 	private String email;
 	private NivelAcesso nivelAcesso;
 
-	public Pessoa(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
+	public Pessoa(String nome, String cpf, String rg, String endereco, String telefone, String email,
 			NivelAcesso nivelAcesso) {
-		this.idPessoa = idPessoa;
+		this.id = contador++;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.rg = rg;
@@ -27,12 +29,12 @@ public class Pessoa {
 		this.nivelAcesso = nivelAcesso;
 	}
 
-	public int getIdPessoa() {
-		return idPessoa;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdPessoa(int idPessoa) {
-		this.idPessoa = idPessoa;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {

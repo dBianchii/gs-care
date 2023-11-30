@@ -1,9 +1,10 @@
 package model;
+
 import java.util.Scanner;
 
 public class Endereco {
-	static private int contador = 1;
-	private int idEndereco; 
+	static private int contador = 0;
+	private int id;
 	private String cep;
 	private String logradouro;
 	private Integer numero;
@@ -11,8 +12,7 @@ public class Endereco {
 	private String complemento;
 
 	public Endereco(String cep, String logradouro, Integer numero, String cidade, String complemento) {
-		this.idEndereco = contador;
-		contador++;
+		this.id = contador;
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -20,8 +20,8 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public int getIdEndereco() {
-		return idEndereco;
+	public int getId() {
+		return id;
 	}
 
 	public String getLogradouro() {
@@ -95,7 +95,7 @@ public class Endereco {
 
 	@Override
 	public String toString() {
-		return "Endereco [idEndereco=" + idEndereco + ", cep=" + getCep() + ", logradouro=" + logradouro + ", numero="
+		return "Endereco [idEndereco=" + id + ", cep=" + getCep() + ", logradouro=" + logradouro + ", numero="
 				+ numero + ", cidade=" + cidade + ", complemento=" + getComplemento() + "]";
 	}
 

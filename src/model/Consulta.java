@@ -1,31 +1,23 @@
 package model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Consulta extends Evento {
-	private int idConsulta; // chave primária
-	private String endereco; // tipo Endereco ou tipo int ?
+	private int idEndereco;
 
-	public Consulta(int idEvento, String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim, StatusEvento status,
-			int idConsulta, String endereco) {
-		super(idEvento, titulo, data, horaInicio, horaFim, status);
-		this.idConsulta = idConsulta;
+	public Consulta(String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim,
+			StatusEvento status, int idPaciente, int idEndereco) {
+		super(titulo, data, horaInicio, horaFim, status, idPaciente);
+		this.idEndereco = idEndereco;
 	}
 
-	public int getIdConsulta() {
-		return idConsulta;
+	public int getIdEndereco() {
+		return idEndereco;
 	}
 
-	public void setIdConsulta(int idConsulta) {
-		this.idConsulta = idConsulta;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setIdEndereco(int idEndereco) {
+		this.idEndereco = idEndereco;
 	}
 
 }

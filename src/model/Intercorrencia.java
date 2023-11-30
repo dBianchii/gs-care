@@ -1,4 +1,5 @@
 package model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -14,10 +15,10 @@ public class Intercorrencia extends Registro {
 	private TipoIntercorrencia tipoIntercorrencia;
 	private String observacao;
 
-	public Intercorrencia(int idRegistro, LocalDate data, LocalTime hora, TipoIntercorrencia tipoIntercorencia,
-			String observacao) {
+	public Intercorrencia(LocalDate data, LocalTime hora, TipoIntercorrencia tipoIntercorencia,
+			String observacao, int idPaciente) {
 
-		super(idRegistro, data, hora);
+		super(data, hora, idPaciente);
 		this.tipoIntercorrencia = tipoIntercorencia;
 		this.observacao = observacao;
 	}

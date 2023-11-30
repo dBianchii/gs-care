@@ -1,4 +1,5 @@
 package model;
+
 enum GrauParentesco {
 	PAI,
 	MAE,
@@ -16,13 +17,12 @@ enum GrauParentesco {
 }
 
 public class Familiar extends Cuidador {
-	// chave primária?
 	private GrauParentesco grauParentesco;
 
-	public Familiar(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
+	public Familiar(String nome, String cpf, String rg, String endereco, String telefone, String email,
 			NivelAcesso nivelAcesso,
-			GrauParentesco grauParentesco) {
-		super(idPessoa, nome, cpf, rg, endereco, telefone, email, nivelAcesso);
+			GrauParentesco grauParentesco, int idPaciente) {
+		super(nome, cpf, rg, endereco, telefone, email, nivelAcesso, idPaciente);
 
 		this.grauParentesco = grauParentesco;
 	}

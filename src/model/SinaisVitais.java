@@ -1,9 +1,10 @@
 package model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class SinaisVitais extends Registro {
-	private double indice; // chave primária
+	private double indice; // ? O que é indice?
 	private double temperatura;
 	private int saturacao;
 	private String pressaoArterial; // ex.: 120/80
@@ -11,10 +12,11 @@ public class SinaisVitais extends Registro {
 	private int frequenciaRespiratoria;
 	private double glicemia;
 
-	public SinaisVitais(int idRegistro, LocalDate data, LocalTime hora,
+	public SinaisVitais(LocalDate data, LocalTime hora,
 			double indice, double temperatura, int saturacao, String pressaoArterial,
-			int frequenciaCardiaca, int frequenciaRespiratoria, double glicemia) {
-		super(idRegistro, data, hora);
+			int frequenciaCardiaca, int frequenciaRespiratoria, double glicemia, int idPaciente) {
+
+		super(data, hora, idPaciente);
 
 		this.indice = indice;
 		this.temperatura = temperatura;

@@ -1,4 +1,5 @@
 package model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -9,15 +10,19 @@ enum StatusEvento {
 }
 
 public class Evento {
-	private int idEvento; // chave primária
+	private static int contador = 0;
+	private int id;
+	private int idPaciente;
 	private String titulo;
 	private LocalDate data;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
-	private StatusEvento status; 
+	private StatusEvento status;
 
-	public Evento(int idEvento, String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim, StatusEvento status) {
-		this.idEvento = idEvento;
+	public Evento(String titulo, LocalDate data, LocalTime horaInicio, LocalTime horaFim,
+			StatusEvento status, int idPaciente) {
+		this.idPaciente = idPaciente;
+		this.id = contador++;
 		this.titulo = titulo;
 		this.data = data;
 		this.horaInicio = horaInicio;
@@ -25,12 +30,20 @@ public class Evento {
 		this.status = status;
 	}
 
-	public int getIdEvento() {
-		return idEvento;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdEvento(int idEvento) {
-		this.idEvento = idEvento;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getIdPaciente() {
+		return idPaciente;
+	}
+
+	public void setIdPaciente(int id) {
+		this.idPaciente = id;
 	}
 
 	public String getTitulo() {

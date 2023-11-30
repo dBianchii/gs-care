@@ -1,4 +1,5 @@
 package model;
+
 import java.time.LocalDate;
 
 enum TipoSanguineo {
@@ -19,16 +20,15 @@ enum Genero {
 }
 
 public class Paciente extends Pessoa {
-	// chave primária?
 	private LocalDate dataNascimento;
 	private Genero genero;
 	private TipoSanguineo tipoSanguineo;
 	private Boolean fumante;
 
-	public Paciente(int idPessoa, String nome, String cpf, String rg, String endereco, String telefone, String email,
+	public Paciente(String nome, String cpf, String rg, String endereco, String telefone, String email,
 			NivelAcesso nivelAcesso,
 			LocalDate dataNascimento, Genero genero, TipoSanguineo tipoSanguineo, Boolean fumante) {
-		super(idPessoa, nome, cpf, rg, endereco, telefone, email, nivelAcesso);
+		super(nome, cpf, rg, endereco, telefone, email, nivelAcesso);
 
 		this.dataNascimento = dataNascimento;
 		this.genero = genero;

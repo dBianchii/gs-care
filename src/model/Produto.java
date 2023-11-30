@@ -1,29 +1,21 @@
 package model;
-import java.util.ArrayList;
 
 public class Produto {
 	private static int contador = 0;
-	private static ArrayList<Produto> produtos = new ArrayList<Produto>();
-	private int idProduto; // chave primária
+	private int id;
 	private String nome;
 	private String descricao;
 	private double preco;
 
 	public Produto(String nome, String descricao, double preco) {
-		this.idProduto = contador;
-		contador++;
+		this.id = contador++;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.preco = preco;
-		produtos.add(this);
 	}
 
-	public static ArrayList<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public int getIdProduto() {
-		return idProduto;
+	public int getId() {
+		return id;
 	}
 
 	public String getNome() {
@@ -58,14 +50,7 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [idProduto=" + idProduto + ", nome=" + nome + ", descrição=" + descricao + ", preço=R$" + getPreco() + "]";
-	}
-
-	public static void main(String[] args) {
-		Produto.criaProdutos();
-
-		for (Produto produto : produtos) {
-			System.out.println(produto);
-		}
+		return "Produto [idProduto=" + id + ", nome=" + nome + ", descrição=" + descricao + ", preço=R$" + getPreco()
+				+ "]";
 	}
 }
