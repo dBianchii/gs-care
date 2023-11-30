@@ -33,4 +33,9 @@ public class Familiar extends Cuidador {
 		this.grauParentesco = grauParentesco;
 	}
 
+	@Override
+	public String toString() {
+		return "Familiar [grauParentesco=" + grauParentesco + ", nome=" + super.getNome() + ", cpf=" + super.getCpf() + ", rg=" + super.getRg() + ", idEndereco=" + super.getIdEndereco() + ", telefone=" + super.getTelefone() + ", email=" + super.getEmail() + ", nivelAcesso=" + super.getNivelAcesso() + ", idPaciente=" + super.getIdPaciente() + "]";
+	}	
+
 }

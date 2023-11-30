@@ -26,4 +26,8 @@ public class Rotina extends Evento {
 		this.tipo = tipo;
 	}
 
+	@Override	
+	public String toString() {
+		return "Rotina [idEvento= " + super.getId() + ", tipo=" + tipo + "]";
+	}
 }

@@ -43,7 +43,7 @@ public class Medicacao extends Evento {
 
 	@Override
 	public String toString() {
-		return "Medicacao [id=" + this.getId() + ", dosagem=" + dosagem + ", intervalo=" + intervalo + ", duracao="
+		return "Medicacao [idEvento=" + super.getId() + ", dosagem=" + dosagem + ", intervalo=" + intervalo + ", duracao="
 				+ duracao + "]";
 	}
 

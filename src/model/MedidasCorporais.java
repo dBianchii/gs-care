@@ -30,4 +30,9 @@ public class MedidasCorporais extends Registro {
 		this.altura = altura;
 	}
 
+	@Override
+	public String toString() {
+		return "MedidasCorporais [idRegistro= " + super.getId() + ", peso=" + peso + ", altura=" + altura + "]";
+	}
+
 }

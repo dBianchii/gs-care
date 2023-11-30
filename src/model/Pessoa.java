@@ -87,4 +87,5 @@ public class Pessoa {
 	public void setNivelAcesso(NivelAcesso nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
 	}
+	
 }

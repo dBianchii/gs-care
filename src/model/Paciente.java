@@ -68,4 +68,12 @@ public class Paciente extends Pessoa {
 		this.fumante = fumante;
 	}
 
+	@Override
+	public String toString() {
+		return "Paciente [dataNascimento=" + dataNascimento + ", genero=" + genero + ", tipoSanguineo=" + tipoSanguineo
+				+ ", fumante=" + fumante + ", nome=" + super.getNome() + ", cpf=" + super.getCpf() + ", rg="
+				+ super.getRg() + ", idEndereco=" + super.getIdEndereco() + ", telefone=" + super.getTelefone()
+				+ ", email=" + super.getEmail() + ", nivelAcesso=" + super.getNivelAcesso() + "]";
+	}
+
 }

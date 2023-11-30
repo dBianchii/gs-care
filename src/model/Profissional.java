@@ -17,4 +17,10 @@ public class Profissional extends Cuidador {
 	public void setIdEmpresa(int id) {
 		this.idEmpresa = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Profissional [idEmpresa=" + idEmpresa + ", nome=" + super.getNome() + ", cpf=" + super.getCpf() + ", rg=" + super.getRg() + ", idEndereco=" + super.getIdEndereco() + ", telefone=" + super.getTelefone() + ", email=" + super.getEmail() + ", nivelAcesso=" + super.getNivelAcesso() + ", idPaciente=" + super.getIdPaciente() + "]";
+	}
+
 }

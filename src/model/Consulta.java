@@ -20,4 +20,11 @@ public class Consulta extends Evento {
 		this.idEndereco = idEndereco;
 	}
 
+	@Override
+	public String toString() {
+		return "Consulta [idEvento= " + super.getId() + "idEndereco=" + idEndereco + ", titulo=" + super.getTitulo() + ", data=" + super.getData()
+				+ ", horaInicio=" + super.getHoraInicio() + ", horaFim=" + super.getHoraFim() + ", status=" + super.getStatus() + ", idPaciente="
+				+ super.getIdPaciente() + "]";
+	}
+
 }

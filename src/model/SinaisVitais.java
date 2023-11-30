@@ -73,4 +73,9 @@ public class SinaisVitais extends Registro {
 		this.glicemia = glicemia;
 	}
 
+	@Override
+	public String toString() {
+		return "SinaisVitais [idRegistro= " + super.getId() + ", temperatura=" + temperatura + ", saturacao=" + saturacao + ", pressaoArterial=" + pressaoArterial + ", frequenciaCardiaca=" + frequenciaCardiaca + ", frequenciaRespiratoria=" + frequenciaRespiratoria + ", glicemia=" + glicemia + "]";
+	}
+
 }

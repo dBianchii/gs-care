@@ -39,4 +39,9 @@ public class Intercorrencia extends Registro {
 		this.observacao = observacao;
 	}
 
+	@Override
+	public String toString() {
+		return "Intercorrencia [idRegistro= " + super.getId() + ", tipo=" + tipo + ", observacao=" + observacao + "]";
+	}
+
 }
