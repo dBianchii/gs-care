@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Registro {
+public abstract class Registro {
 	private static int contador = 0;
 	private int id;
 	private int idPaciente;

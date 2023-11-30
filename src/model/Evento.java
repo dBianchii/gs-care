@@ -9,7 +9,7 @@ enum StatusEvento {
 	CANCELADO
 }
 
-public class Evento {
+public abstract class Evento {
 	private static int contador = 0;
 	private int id;
 	private int idPaciente;

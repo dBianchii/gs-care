@@ -6,7 +6,7 @@ enum NivelAcesso {
 	LEITOR
 }
 
-public class Pessoa {
+public abstract class Pessoa {
 	private static int contador = 0;
 	private int id;
 	private int idEndereco;
@@ -18,7 +18,8 @@ public class Pessoa {
 	private NivelAcesso nivelAcesso;
 
 	// Método construtor da classe Pessoa
-	public Pessoa(String nome, String cpf, String rg, int idEndereco, String telefone, String email, NivelAcesso nivelAcesso) {
+	public Pessoa(String nome, String cpf, String rg, int idEndereco, String telefone, String email,
+			NivelAcesso nivelAcesso) {
 		this.id = contador++;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -103,5 +104,10 @@ public class Pessoa {
 	public void setNivelAcesso(NivelAcesso nivelAcesso) {
 		this.nivelAcesso = nivelAcesso;
 	}
-	
+
+	// Método set sobrecarregado para atributo nivelAcesso
+	public void setNivelAcesso(String nivelAcesso) {
+		this.nivelAcesso = NivelAcesso.valueOf(nivelAcesso.toUpperCase());
+	}
+
 }

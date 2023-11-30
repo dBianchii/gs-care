@@ -1,6 +1,6 @@
 package model;
 
-public class Cuidador extends Pessoa {
+public abstract class Cuidador extends Pessoa {
 
 	private int idPaciente;
 
