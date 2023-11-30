@@ -43,8 +43,8 @@ public class App {
 					System.out.println("Escolha 0, 1 ou 2.\n");
 				} else {
 					idProdutoEscolhido = inputParseado;
-					System.out.println("\n-> Você escolheu o produto "
-							+ produtos.get(idProdutoEscolhido).getNome().toUpperCase() + ".\n");
+					System.out.println("-> Você escolheu o "
+							+ produtos.get(idProdutoEscolhido) + ".\n");
 					break;
 				}
 			} else {
@@ -62,8 +62,8 @@ public class App {
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 		} else {
-			System.out.println("\n-> Você escolheu o produto "
-					+ produtos.get(idProdutoEscolhido).getNome().toUpperCase() + ".\n");
+			System.out.println("-> Você escolheu o "
+					+ produtos.get(idProdutoEscolhido) + ".\n");
 		}
 	}
 
@@ -149,8 +149,7 @@ public class App {
 
 	public static void main(String[] args) {
 		App app = new App();
-		app.inserirCartaoCredito();
-		app.inserirCartaoCredito();
-		app.visualizarCartoesCadastrados();
+		app.escolherProduto();
+		app.visualizarProdutoEscolhido();
 	}
 }
