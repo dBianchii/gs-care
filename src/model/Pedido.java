@@ -27,20 +27,8 @@ public class Pedido {
 		this.idProduto = idProduto;
 	}
 
-	public static int getContador() {
-		return contador;
-	}
-
-	public static void setContador(int contador) {
-		Pedido.contador = contador;
-	}
-
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getIdPaciente() {

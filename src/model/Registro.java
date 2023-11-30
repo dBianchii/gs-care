@@ -21,10 +21,6 @@ public class Registro {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public LocalDate getData() {
 		return data;
 	}
