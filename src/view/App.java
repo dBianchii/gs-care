@@ -70,6 +70,7 @@ public class App {
 	// método para cadastrar os dados de um cartão de crédito
 	public void inserirCartaoCredito() {
 		Scanner sc = new Scanner(System.in);
+
 		String numero;
 		String nomeTitular;
 		String validadeMes;
@@ -77,9 +78,9 @@ public class App {
 		int cvv;
 
 		System.out.println("4. Cadastrar Cartão de Crédito: \n");
-	
+
 		while (true) {
-			System.out.println("• Número do cartão (16 dígitos): ");
+			System.out.print("• Número do cartão (16 dígitos): ");
 			numero = sc.nextLine();
 			if (CartaoCredito.verificaNumero(numero)) {
 				break;
@@ -87,9 +88,9 @@ public class App {
 				System.out.println("☒ Número inválido. Tente novamente.\n");
 			}
 		}
-	
+
 		while (true) {
-			System.out.println("• Nome do Titular do Cartão: ");
+			System.out.print("• Nome do Titular do Cartão: ");
 			nomeTitular = sc.nextLine();
 			if (CartaoCredito.verificaNome(nomeTitular)) {
 				break;
@@ -97,9 +98,9 @@ public class App {
 				System.out.println("☒ Nome inválido. Tente novamente.\n");
 			}
 		}
-	
+
 		while (true) {
-			System.out.println("• Mês de Validade do Cartão (2 dígitos): ");
+			System.out.print("• Mês de Validade do Cartão (2 dígitos): ");
 			validadeMes = sc.nextLine();
 			if (CartaoCredito.verificaMes(validadeMes)) {
 				break;
@@ -107,9 +108,9 @@ public class App {
 				System.out.println("☒ Mês inválido. Tente novamente.\n");
 			}
 		}
-	
+
 		while (true) {
-			System.out.println("• Ano de Validade do Cartão (4 dígitos): ");
+			System.out.print("• Ano de Validade do Cartão (4 dígitos): ");
 			validadeAno = sc.nextLine();
 			if (CartaoCredito.verificaAno(validadeAno)) {
 				break;
@@ -117,9 +118,9 @@ public class App {
 				System.out.println("☒ Ano inválido. Tente novamente.\n");
 			}
 		}
-	
+
 		while (true) {
-			System.out.println("• CVV (3 dígitos): ");
+			System.out.print("• CVV (3 dígitos): ");
 			cvv = sc.nextInt();
 			if (CartaoCredito.verificaCvv(cvv)) {
 				break;
@@ -129,9 +130,9 @@ public class App {
 		}
 		CartaoCredito cartao = new CartaoCredito(numero, nomeTitular, validadeMes, validadeAno, cvv);
 		cartoes.add(cartao);
-	
+
 		System.out.println("\n-> Você inseriu o cartão final " + cartao.getNumero().substring(12) + " com sucesso!\n");
-		sc.close();
+
 	}
 
 	// método para visualizar os cartões de crédito cadastrados
@@ -148,6 +149,7 @@ public class App {
 
 	public static void main(String[] args) {
 		App app = new App();
+		app.inserirCartaoCredito();
 		app.inserirCartaoCredito();
 		app.visualizarCartoesCadastrados();
 	}
