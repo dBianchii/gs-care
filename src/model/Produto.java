@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Produto {
 	private static int contador = 0;
 	private int id;
@@ -51,10 +53,14 @@ public class Produto {
 	}
 
 	// Método para criar produtos
-	public static void criaProdutos() {
-		new Produto("Cuidado Essencial", "Plano mensal para 1 paciente com até 2 cuidadores", 29.90);
-		new Produto("Cuidado Premium", "Plano mensal para 1 paciente com até 5 cuidadores", 49.90);
-		new Produto("Cuidado Total", "Plano mensal para 1 paciente com 6 ou mais cuidadores", 89.90);
+	public static ArrayList<Produto> getProdutos() {
+		ArrayList<Produto> produtos = new ArrayList<Produto>();
+
+		produtos.add(new Produto("Cuidado Essencial", "Plano mensal para 1 paciente com até 2 cuidadores", 29.90));
+		produtos.add(new Produto("Cuidado Premium", "Plano mensal para 1 paciente com até 5 cuidadores", 49.90));
+		produtos.add(new Produto("Cuidado Total", "Plano mensal para 1 paciente com 6 ou mais cuidadores", 89.90));
+
+		return produtos;
 	}
 
 	// Método toString para impressão de dados (sobrescrito do método toString da classe Object)

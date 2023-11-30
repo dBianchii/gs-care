@@ -38,7 +38,7 @@ public class CartaoCredito {
 	}
 
 	// Método que verifica se o número do cartão de crédito é válido
-	public boolean verificaNumero(String numero) {
+	public static boolean verificaNumero(String numero) {
 		return numero.length() == 16 && numero.matches("[0-9]+");
 	}
 
@@ -53,7 +53,7 @@ public class CartaoCredito {
 	}
 
 	// Método que verifica se o nome do titular do cartão de crédito é válido
-	public boolean verificaNome(String nomeTitular) {
+	public static boolean verificaNome(String nomeTitular) {
 		return nomeTitular.matches("[a-zA-Z ]+");
 	}
 
@@ -68,7 +68,7 @@ public class CartaoCredito {
 	}
 
 	// Método que verifica se o mês de validade do cartão de crédito é válido
-	public boolean verificaMes(String validadeMes) {
+	public static boolean verificaMes(String validadeMes) {
 		return validadeMes.length() == 2
 				&& validadeMes.matches("[0-9]+")
 				&& Integer.parseInt(validadeMes) >= 1
@@ -86,7 +86,7 @@ public class CartaoCredito {
 	}
 
 	// Método que verifica se o ano de validade do cartão de crédito é válido
-	public boolean verificaAno(String validadeAno) {
+	public static boolean verificaAno(String validadeAno) {
 		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 		return validadeAno.length() == 4
 				&& validadeAno.matches("[0-9]+")
@@ -105,7 +105,7 @@ public class CartaoCredito {
 	}
 
 	// Método que verifica se o cvv do cartão de crédito é válido
-	public boolean verificaCvv(int cvv) {
+	public static boolean verificaCvv(int cvv) {
 		return cvv >= 100 && cvv <= 999;
 	}
 
