@@ -53,7 +53,7 @@ public class Produto {
 	}
 
 	// Método para criar produtos
-	public static ArrayList<Produto> getProdutos() {
+	public static ArrayList<Produto> criarProdutos() {
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
 
 		produtos.add(new Produto("Cuidado Essencial", "Plano mensal para 1 paciente com até 2 cuidadores", 29.90));
@@ -63,7 +63,8 @@ public class Produto {
 		return produtos;
 	}
 
-	// Método toString para impressão de dados (sobrescrito do método toString da classe Object)
+	// Método toString para impressão de dados (sobrescrito do método toString da
+	// classe Object)
 	@Override
 	public String toString() {
 		return "Produto [idProduto=" + id + ", nome=" + nome + ", descrição=" + descricao + ", preço=R$" + getPreco()

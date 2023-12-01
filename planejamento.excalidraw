@@ -5,8 +5,8 @@
   "elements": [
     {
       "type": "rectangle",
-      "version": 275,
-      "versionNonce": 1284483396,
+      "version": 277,
+      "versionNonce": 1202847091,
       "isDeleted": false,
       "id": "219bu5Oi3WO0yG0Onw4pN",
       "fillStyle": "solid",
@@ -28,14 +28,14 @@
         "type": 3
       },
       "boundElements": [],
-      "updated": 1701380581692,
+      "updated": 1701393503708,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 593,
-      "versionNonce": 280654788,
+      "version": 754,
+      "versionNonce": 2005106621,
       "isDeleted": false,
       "id": "HnZTVlOWOXwCf_TF-3D41",
       "fillStyle": "solid",
@@ -49,24 +49,24 @@
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
       "width": 459.91961669921875,
-      "height": 450,
+      "height": 475,
       "seed": 677911695,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1701380588916,
+      "updated": 1701393695186,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "1. Visualizar Produtos\n2. Escolher Produto\n3. Visualizar Produto Escolhido\n4. Cadastrar Cartão de Crédito\n5. Visualizar Cartões de Crédito cadastrados\n. Fazer pedido\n. Ver pedidos\n. Cadastrar Cuidadores\n. Cadastrar Paciente\n. Visualizar Cuidadores\n. Visualizar Pacientes\n. Cadastrar Eventos\n. Registros\n. Visualizar Registros\n\n\n\n",
+      "text": "1. Visualizar Produtos\n2. Escolher Produto\n3. Visualizar Produto Escolhido\n4. Cadastrar Cartão de Crédito\n5. Visualizar Cartões de Crédito cadastrados\n. Fazer pedido\n. Ver pedidos\n. Cadastrar Cuidadores\n. Cadastrar Paciente\n. Visualizar Cuidadores\n. Visualizar Pacientes\n. Cadastrar Eventos\n. Visualizar eventos\n. Cadastrar Registros\n. Visualizar Registros\n\n\n\n",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "1. Visualizar Produtos\n2. Escolher Produto\n3. Visualizar Produto Escolhido\n4. Cadastrar Cartão de Crédito\n5. Visualizar Cartões de Crédito cadastrados\n. Fazer pedido\n. Ver pedidos\n. Cadastrar Cuidadores\n. Cadastrar Paciente\n. Visualizar Cuidadores\n. Visualizar Pacientes\n. Cadastrar Eventos\n. Registros\n. Visualizar Registros\n\n\n\n",
+      "originalText": "1. Visualizar Produtos\n2. Escolher Produto\n3. Visualizar Produto Escolhido\n4. Cadastrar Cartão de Crédito\n5. Visualizar Cartões de Crédito cadastrados\n. Fazer pedido\n. Ver pedidos\n. Cadastrar Cuidadores\n. Cadastrar Paciente\n. Visualizar Cuidadores\n. Visualizar Pacientes\n. Cadastrar Eventos\n. Visualizar eventos\n. Cadastrar Registros\n. Visualizar Registros\n\n\n\n",
       "lineHeight": 1.25,
-      "baseline": 443
+      "baseline": 467
     }
   ],
   "appState": {
