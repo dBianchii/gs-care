@@ -1,23 +1,12 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-enum TipoSanguineo {
-	A_POSITIVO,
-	A_NEGATIVO,
-	B_POSITIVO,
-	B_NEGATIVO,
-	AB_POSITIVO,
-	AB_NEGATIVO,
-	O_POSITIVO,
-	O_NEGATIVO
-}
-
-enum Genero {
-	MASCULINO,
-	FEMININO,
-	OUTRO
-}
+import enums.Genero;
+import enums.NivelAcesso;
+import enums.TipoSanguineo;
 
 public class Paciente extends Pessoa {
 	private LocalDate dataNascimento;
@@ -45,6 +34,23 @@ public class Paciente extends Pessoa {
 	// Método set para atributo dataNascimento
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	// Método set para atributo dataNascimento (sobrecarga)
+	public static LocalDate setDataNascimento(String dataNascimento) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return LocalDate.parse(dataNascimento, formatter);
+	}
+
+	// Método para verificar se data de nascimento é válida
+	public static boolean verificaDataNascimento(String dataNascimento) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		try {
+			LocalDate.parse(dataNascimento, formatter);
+			return true;
+		} catch (DateTimeParseException e) {
+			return false;
+		}
 	}
 
 	// Método get para atributo genero
@@ -77,7 +83,8 @@ public class Paciente extends Pessoa {
 		this.fumante = fumante;
 	}
 
-	// Método toString para impressão de dados (sobrescrito do método toString da classe Object)
+	// Método toString para impressão de dados (sobrescrito do método toString da
+	// classe Object)
 	@Override
 	public String toString() {
 		return "Paciente [dataNascimento=" + dataNascimento + ", genero=" + genero + ", tipoSanguineo=" + tipoSanguineo

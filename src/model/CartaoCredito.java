@@ -39,7 +39,8 @@ public class CartaoCredito {
 
 	// Método que verifica se o número do cartão de crédito é válido
 	public static boolean verificaNumero(String numero) {
-		return numero.length() == 16 && numero.matches("[0-9]+");
+		String numeros = numero.replaceAll("\\D", "");
+		return numeros.length() == 16 && numero.matches("[0-9]+");
 	}
 
 	// Método get para atributo nomeTitular
@@ -50,11 +51,6 @@ public class CartaoCredito {
 	// Método set para atributo nomeTitular
 	public void setNomeTitular(String nomeTitular) {
 		this.nomeTitular = nomeTitular;
-	}
-
-	// Método que verifica se o nome do titular do cartão de crédito é válido
-	public static boolean verificaNome(String nomeTitular) {
-		return nomeTitular.matches("[a-zA-Z ]+");
 	}
 
 	// Método get para atributo validadeMes

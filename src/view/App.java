@@ -1,34 +1,68 @@
 package view;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.CartaoCredito;
 import model.Cuidador;
-import model.Evento;
+import model.Empresa;
+import model.Endereco;
+import model.Familiar;
 import model.Paciente;
 import model.Pedido;
+import model.Pessoa;
 import model.Produto;
+import model.Profissional;
 import model.Registro;
+import enums.Genero;
+import enums.GrauParentesco;
+import enums.NivelAcesso;
+import enums.TipoSanguineo;
 
 public class App {
 	private final Scanner scanner = new Scanner(System.in);
+
+	Paciente paciente;
+	int idPaciente = 1; // somente 1 paciente na aplicação
 
 	private ArrayList<Produto> produtos = Produto.criarProdutos();
 	private ArrayList<CartaoCredito> cartoes = new ArrayList<CartaoCredito>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 	private ArrayList<Cuidador> cuidadores = new ArrayList<Cuidador>();
-	private ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
-	private ArrayList<Evento> eventos = new ArrayList<Evento>();
+	private ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
+	private ArrayList<Empresa> empresas = new ArrayList<Empresa>();
 	private ArrayList<Registro> registros = new ArrayList<Registro>();
 
 	private int idProdutoEscolhido = -1;
 
-	public void menu() {
+	public void inicializarDados() {
+		String cpf = "12345678901";
+		String rg = "1234567890";
+		int idEndereco = 1; // TODO: uuuh.... ?
+		String telefone = "123456789";
+		String email = "joana@joana.com.br";
+		NivelAcesso nivelAcesso = NivelAcesso.LEITOR;
+		LocalDate dataNascimento = LocalDate.of(1990, 1, 1);
+		Genero genero = Genero.FEMININO;
+		TipoSanguineo tipoSanguineo = TipoSanguineo.A_POSITIVO;
+		Boolean fumante = false;
 
-		System.out.println("\n-------------------------------");
-		System.out.println("* * * * * * HAPCARE * * * * * *");
-		System.out.println("-------------------------------\n");
+		paciente = new Paciente("João", cpf, rg, idEndereco, telefone, email, nivelAcesso, dataNascimento, genero,
+				tipoSanguineo, fumante);
+	}
+
+	// limpar a tela
+	public void limparTela() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
+	public void menu() {
+		limparTela();
+		System.out.println("-------------------------------------");
+		System.out.println("\s* * * * * * * HAPCARE * * * * * * *");
+		System.out.println("-------------------------------------\n");
 		System.out.println("\nMENU PRINCIPAL");
 		System.out.println("-------------------------------------");
 		System.out.println("1. Visualizar Produtos");
@@ -40,12 +74,9 @@ public class App {
 		System.out.println("7. Ver Pedidos");
 		System.out.println("8. Cadastrar Cuidador");
 		System.out.println("9. Visualizar Cuidadores Cadastrados");
-		System.out.println("10. Visualizar Pacientes Cadastrados");
-		System.out.println("11. Cadastrar Eventos");
-		System.out.println("12. Visualizar Eventos Cadastrados");
-		System.out.println("13. Cadastrar Registros");
-		System.out.println("14. Visualizar Registros Cadastrados");
-		System.out.println("15. Sair");
+		System.out.println("10. Cadastrar Paciente");
+		System.out.println("11. Visualizar Paciente");
+		System.out.println("12. Sair");
 		System.out.println("-------------------------------------\n");
 		System.out.print("Escolha uma opção: ");
 
@@ -54,10 +85,10 @@ public class App {
 			String input = scanner.nextLine();
 			try {
 				opcao = Integer.parseInt(input);
-				if (opcao >= 1 && opcao <= 15)
+				if (opcao >= 1 && opcao <= 12)
 					break; // exit the loop if input is within the valid range
 				else
-					System.out.println("Por favor, escolha um número entre 1 e 15.");
+					System.out.println("Por favor, escolha um número entre 1 e 12.");
 			} catch (NumberFormatException e) {
 				System.out.println("Opção inválida! Por favor, insira um número.");
 			}
@@ -92,21 +123,12 @@ public class App {
 				visualizarCuidadores();
 				break;
 			case 10:
-				visualizarPacientes();
+				cadastrarPaciente();
 				break;
 			case 11:
-				cadastrarEventos();
+				visualizarPaciente();
 				break;
 			case 12:
-				visualizarEventos();
-				break;
-			case 13:
-				cadastrarRegistros();
-				break;
-			case 14:
-				visualizarRegistros();
-				break;
-			case 15:
 				System.out.println("\nObrigado por utilizar o HapCare!");
 				System.exit(0);
 				break;
@@ -121,7 +143,7 @@ public class App {
 
 	// método para visualizar os produtos da HapCare
 	public void visualizarProdutos() {
-		System.out.println("1. Visualizar Produtos: \n");
+		System.out.println("\n1. Visualizar Produtos: \n");
 
 		for (Produto produto : produtos) {
 			System.out.println("\s\s " + produto.getId() + " - " + produto.getNome().toUpperCase());
@@ -133,7 +155,7 @@ public class App {
 
 	// método para escolher o produto
 	public void escolherProduto() {
-		System.out.println("2. Escolher Produto: \n");
+		System.out.println("\n2. Escolher Produto: \n");
 
 		while (true) {
 			System.out.print("Digite o número do produto desejado: ");
@@ -159,7 +181,7 @@ public class App {
 
 	// método para visualizar o produto escolhido
 	public void visualizarProdutoEscolhido() {
-		System.out.println("3. Visualizar Produto Escolhido: \n");
+		System.out.println("\n3. Visualizar Produto Escolhido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 		} else {
@@ -177,7 +199,7 @@ public class App {
 		String validadeAno;
 		int cvv;
 
-		System.out.println("4. Cadastrar Cartão de Crédito: \n");
+		System.out.println("\n4. Cadastrar Cartão de Crédito: \n");
 
 		while (true) {
 			System.out.print("• Número do cartão (16 dígitos): ");
@@ -192,7 +214,7 @@ public class App {
 		while (true) {
 			System.out.print("• Nome do Titular do Cartão: ");
 			nomeTitular = scanner.nextLine();
-			if (CartaoCredito.verificaNome(nomeTitular)) {
+			if (Pessoa.verificaNome(nomeTitular)) {
 				break;
 			} else {
 				System.out.println("☒ Nome inválido. Tente novamente.\n");
@@ -242,12 +264,12 @@ public class App {
 
 	// método para visualizar os cartões de crédito cadastrados
 	public void visualizarCartoesCadastrados() {
-		System.out.println("5. Visualizar Cartões de Crédito Cadastrados: \n");
+		System.out.println("\n5. Visualizar Cartões de Crédito Cadastrados: \n");
 		if (cartoes.size() == 0) {
 			System.out.println("Você ainda não cadastrou nenhum cartão de crédito.");
 		} else {
 			for (CartaoCredito cartao : cartoes) {
-				System.out.println("\s\s " + cartao);
+				System.out.println("- " + cartao);
 			}
 		}
 		voltarMenu();
@@ -255,7 +277,7 @@ public class App {
 
 	// método para fazer um pedido
 	public void fazerPedido() {
-		System.out.println("6. Fazer Pedido: \n");
+		System.out.println("\n6. Fazer Pedido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 		} else if (cartoes.isEmpty()) {
@@ -268,52 +290,527 @@ public class App {
 			pedidos.add(new Pedido(idCartao, 1, 1));
 
 			System.out.println("-> Pedido realizado com sucesso!\n");
+			pedidos.add(new Pedido(idProdutoEscolhido, cartoes.get(cartoes.size() - 1).getId(), idPaciente));
+			voltarMenu();
 		}
 		voltarMenu();
 	}
 
 	// método para ver os pedidos
 	public void verPedidos() {
-
+		System.out.println("\n7. Ver Pedidos: \n");
+		if (pedidos.size() == 0) {
+			System.out.println("Você ainda não fez nenhum pedido.");
+		} else {
+			for (Pedido pedido : pedidos) {
+				System.out.println("- " + pedido);
+			}
+		}
+		voltarMenu();
 	}
 
 	// método para cadastrar os dados de um cuidador
 	public void cadastrarCuidador() {
+		boolean familiar;
+		String nome;
+		String cpf;
+		String rg;
+		String telefone;
+		String email;
+		int nivelAcesso;
+		int grauParentesco = -1;
+		String cnpj;
+		String razaoSocial;
+		String nomeFantasia;
+		String inscricaoEstadual;
+		Empresa empresa = null;
+		String cep;
+		String logradouro;
+		int numero = 0;
+		String cidade;
+		String complemento;
+		Endereco endereco;
 
+		System.out.println("8. Cadastrar Cuidador: \n");
+
+		while (true) {
+			System.out.print("• Você é familiar do paciente? (S/N) ");
+			String input = scanner.nextLine();
+			if (input.equalsIgnoreCase("S")) {
+				familiar = true;
+				break;
+			} else if (input.equalsIgnoreCase("N")) {
+				familiar = false;
+				break;
+			} else {
+				System.out.println("☒ Opção inválida. Tente novamente.\n");
+			}
+		}
+
+		if (familiar) {
+			System.out.println("• Informe o grau de parentesco do cuidador: ");
+			for (GrauParentesco grau : GrauParentesco.values()) {
+				System.out.println("\s\s" + grau.ordinal() + " - " + grau);
+			}
+			int opcao;
+			while (true) {
+				String input = scanner.nextLine();
+				try {
+					opcao = Integer.parseInt(input);
+					if (opcao >= 0 && opcao <= GrauParentesco.values().length) {
+						grauParentesco = opcao;
+						break; // exit the loop if input is within the valid range
+					} else
+						System.out.println(
+								"Por favor, escolha um número entre 0 e " + (GrauParentesco.values().length - 1) + ".");
+				} catch (NumberFormatException e) {
+					System.out.println("Opção inválida! Por favor, insira um número.");
+				}
+			}
+		}
+
+		if (!familiar) {
+			while (true) {
+				System.out.print("• CNPJ da Empresa (14 dígitos): ");
+				cnpj = scanner.nextLine();
+				if (Empresa.verificaCnpj(cnpj)) {
+					break;
+				} else {
+					System.out.println("☒ CNPJ inválido. Tente novamente.\n");
+				}
+			}
+
+			System.out.print("• Informe a razão social da Empresa: ");
+			razaoSocial = scanner.nextLine();
+
+			System.out.print("• Informe o nome fantasia da Empresa: ");
+			nomeFantasia = scanner.nextLine();
+
+			while (true) {
+				System.out.print("• Inscrição Estadual da Empresa (12 dígitos): ");
+				inscricaoEstadual = scanner.nextLine();
+				if (Empresa.verificaInscricaoEstadual(inscricaoEstadual)) {
+					break;
+				} else {
+					System.out.println("☒ Inscrição Estadual inválida. Tente novamente.\n");
+				}
+			}
+
+			empresa = new Empresa(cnpj, razaoSocial, nomeFantasia, inscricaoEstadual);
+			empresas.add(empresa);
+		}
+
+		while (true) {
+			System.out.print("• Nome do Cuidador: ");
+			nome = scanner.nextLine();
+			if (Pessoa.verificaNome(nome)) {
+				break;
+			} else {
+				System.out.println("☒ Nome inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• CPF do Cuidador (11 dígitos): ");
+			cpf = scanner.nextLine();
+			if (Pessoa.verificaCpf(cpf)) {
+				break;
+			} else {
+				System.out.println("☒ CPF inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• RG do Cuidador (máx. 10 dígitos): ");
+			rg = scanner.nextLine();
+			if (Pessoa.verificaRg(rg)) {
+				break;
+			} else {
+				System.out.println("☒ RG inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Telefone do Cuidador (de 8 a 13 dígitos): ");
+			telefone = scanner.nextLine();
+			if (Pessoa.verificaTelefone(telefone)) {
+				break;
+			} else {
+				System.out.println("☒ Telefone inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• E-mail do Cuidador: ");
+			email = scanner.nextLine();
+			if (Pessoa.verificaEmail(email)) {
+				break;
+			} else {
+				System.out.println("☒ E-mail inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.println("• Nível de acesso do cuidador: ");
+			for (NivelAcesso nivel : NivelAcesso.values()) {
+				System.out.println("\s\s" + nivel.ordinal() + " - " + nivel);
+			}
+			int opcao;
+			while (true) {
+				String input = scanner.nextLine();
+				try {
+					opcao = Integer.parseInt(input);
+					if (opcao >= 0 && opcao <= NivelAcesso.values().length)
+						break; // exit the loop if input is within the valid range
+					else
+						System.out
+								.println("Por favor, escolha um número entre 0 e " + (NivelAcesso.values().length - 1)
+										+ ".");
+				} catch (NumberFormatException e) {
+					System.out.println("Opção inválida! Por favor, insira um número.");
+				}
+			}
+			nivelAcesso = opcao;
+			break;
+		}
+
+		System.out.println("Informações do endereço do Cuidador:");
+		while (true) {
+			System.out.print("• CEP (8 dígitos): ");
+			cep = scanner.nextLine();
+			if (Endereco.verificaCep(cep)) {
+				break;
+			} else {
+				System.out.println("☒ CEP inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Logradouro: ");
+			logradouro = scanner.nextLine();
+			if (!logradouro.equals("")) {
+				break;
+			} else {
+				System.out.println("☒ Logradouro inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Número: ");
+			try {
+				numero = Integer.parseInt(scanner.nextLine());
+				if (numero >= 0)
+					break; // exit the loop if input is within the valid range
+				else
+					System.out.println("Por favor, escolha um número positivo.");
+			} catch (NumberFormatException e) {
+				System.out.println("☒ Número inválido! Por favor, insira um número.");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Cidade: ");
+			cidade = scanner.nextLine();
+			if (!cidade.equals("")) {
+				break;
+			} else {
+				System.out.println("☒ Cidade inválida. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Complemento: ");
+			complemento = scanner.nextLine();
+			if (complemento.equals("")) {
+				complemento = "não informado";
+				break;
+			}
+		}
+
+		endereco = new Endereco(cep, logradouro, numero, cidade, complemento);
+		enderecos.add(endereco);
+
+		if (familiar) {
+			cuidadores.add(
+					new Familiar(nome, cpf, rg, endereco.getId(), telefone, email, NivelAcesso.values()[nivelAcesso],
+							GrauParentesco.values()[grauParentesco], idPaciente));
+			System.out.println("\n- Cuidador Familiar cadastrado com sucesso!");
+		} else {
+			cuidadores.add(new Profissional(nome, cpf, rg, endereco.getId(), telefone, email,
+					NivelAcesso.values()[nivelAcesso], idPaciente, empresa.getId()));
+			System.out.println("\n- Cuidador Profissional cadastrado com sucesso!");
+		}
+
+		voltarMenu();
 	}
 
 	// método para visualizar os cuidadores cadastrados
 	public void visualizarCuidadores() {
 
+		System.out.println("9. Visualizar Cuidadores Cadastrados: \n");
+		if (cuidadores.size() == 0) {
+			System.out.println("Você ainda não cadastrou nenhum cuidador.");
+		} else {
+			System.out.println("Cuidadores: ");
+			for (Cuidador cuidador : cuidadores) {
+				System.out.println("- " + cuidador);
+			}
+		}
+
+		voltarMenu();
+	}
+
+	// método para cadastrar os dados de um paciente
+	public void cadastrarPaciente() {
+		String nome;
+		String cpf;
+		String rg;
+		String telefone;
+		String email;
+		int nivelAcesso;
+
+		String cep;
+		String logradouro;
+		int numero = 0;
+		String cidade;
+		String complemento;
+		Endereco endereco;
+
+		LocalDate dataNascimento;
+		int genero;
+		int tipoSanguineo;
+		Boolean fumante;
+
+		System.out.println("10. Cadastrar Paciente: \n");
+
+		if (paciente != null) {
+			System.out.println("Você já cadastrou um paciente.");
+			System.out.println("- " + paciente);
+
+		} else {
+
+			while (true) {
+				System.out.print("• Nome do Paciente: ");
+				nome = scanner.nextLine();
+				if (Pessoa.verificaNome(nome)) {
+					break;
+				} else {
+					System.out.println("☒ Nome inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• CPF do Paciente (11 dígitos): ");
+				cpf = scanner.nextLine();
+				if (Pessoa.verificaCpf(cpf)) {
+					break;
+				} else {
+					System.out.println("☒ CPF inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• RG do Paciente (máx. 10 dígitos): ");
+				rg = scanner.nextLine();
+				if (Pessoa.verificaRg(rg)) {
+					break;
+				} else {
+					System.out.println("☒ RG inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• Telefone do Paciente (de 8 a 13 dígitos): ");
+				telefone = scanner.nextLine();
+				if (Pessoa.verificaTelefone(telefone)) {
+					break;
+				} else {
+					System.out.println("☒ Telefone inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• E-mail do Paciente: ");
+				email = scanner.nextLine();
+				if (Pessoa.verificaEmail(email)) {
+					break;
+				} else {
+					System.out.println("☒ E-mail inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.println("• Nível de acesso do Paciente: ");
+				for (NivelAcesso nivel : NivelAcesso.values()) {
+					System.out.println("\s\s" + nivel.ordinal() + " - " + nivel);
+				}
+				int opcao;
+				while (true) {
+					String input = scanner.nextLine();
+					try {
+						opcao = Integer.parseInt(input);
+						if (opcao >= 0 && opcao <= NivelAcesso.values().length)
+							break; // exit the loop if input is within the valid range
+						else
+							System.out
+									.println("Por favor, escolha um número entre 0 e "
+											+ (NivelAcesso.values().length - 1)
+											+ ".");
+					} catch (NumberFormatException e) {
+						System.out.println("Opção inválida! Por favor, insira um número.");
+					}
+				}
+				nivelAcesso = opcao;
+				break;
+			}
+
+			while (true) {
+				System.out.print("• Data de Nascimento do Paciente (dd/mm/aaaa): ");
+				String data = scanner.nextLine();
+				if (Paciente.verificaDataNascimento(data)) {
+					dataNascimento = Paciente.setDataNascimento(data);
+					break;
+				} else {
+					System.out.println("☒ Data de Nascimento inválida. Tente novamente no formato dd/mm/aaaa.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• Gênero do Paciente: ");
+				for (Genero generoEnum : Genero.values()) {
+					System.out.println("\s\s" + generoEnum.ordinal() + " - " + generoEnum);
+				}
+				int opcao;
+				while (true) {
+					String input = scanner.nextLine();
+					try {
+						opcao = Integer.parseInt(input);
+						if (opcao >= 0 && opcao <= Genero.values().length)
+							break; // exit the loop if input is within the valid range
+						else
+							System.out.println(
+									"Por favor, escolha um número entre 0 e " + (Genero.values().length - 1) + ".");
+					} catch (NumberFormatException e) {
+						System.out.println("Opção inválida! Por favor, insira um número.");
+					}
+				}
+				genero = opcao;
+				break;
+			}
+
+			while (true) {
+				System.out.print("• Tipo Sanguíneo do Paciente: ");
+				for (TipoSanguineo tipoSanguineoEnum : TipoSanguineo.values()) {
+					System.out.println("\s\s" + tipoSanguineoEnum.ordinal() + " - " + tipoSanguineoEnum);
+				}
+				int opcao;
+				while (true) {
+					String input = scanner.nextLine();
+					try {
+						opcao = Integer.parseInt(input);
+						if (opcao >= 0 && opcao <= TipoSanguineo.values().length)
+							break; // exit the loop if input is within the valid range
+						else
+							System.out.println("Por favor, escolha um número entre 0 e "
+									+ (TipoSanguineo.values().length - 1) + ".");
+					} catch (NumberFormatException e) {
+						System.out.println("Opção inválida! Por favor, insira um número.");
+					}
+				}
+				tipoSanguineo = opcao;
+				break;
+			}
+
+			while (true) {
+				System.out.print("• O Paciente é fumante? (S/N) ");
+				String input = scanner.nextLine();
+				if (input.equalsIgnoreCase("S")) {
+					fumante = true;
+					break;
+				} else if (input.equalsIgnoreCase("N")) {
+					fumante = false;
+					break;
+				} else {
+					System.out.println("☒ Opção inválida. Tente novamente.\n");
+				}
+			}
+
+			System.out.println("\n* Informações do endereço do Paciente:");
+			while (true) {
+				System.out.print("• CEP (8 dígitos): ");
+				cep = scanner.nextLine();
+				if (Endereco.verificaCep(cep)) {
+					break;
+				} else {
+					System.out.println("☒ CEP inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• Logradouro: ");
+				logradouro = scanner.nextLine();
+				if (!logradouro.equals("")) {
+					break;
+				} else {
+					System.out.println("☒ Logradouro inválido. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• Número: ");
+				try {
+					numero = Integer.parseInt(scanner.nextLine());
+					if (numero >= 0)
+						break; // exit the loop if input is within the valid range
+					else
+						System.out.println("Por favor, escolha um número positivo.");
+				} catch (NumberFormatException e) {
+					System.out.println("☒ Número inválido! Por favor, insira um número.");
+				}
+			}
+
+			while (true) {
+				System.out.print("• Cidade: ");
+				cidade = scanner.nextLine();
+				if (!cidade.equals("")) {
+					break;
+				} else {
+					System.out.println("☒ Cidade inválida. Tente novamente.\n");
+				}
+			}
+
+			while (true) {
+				System.out.print("• Complemento: ");
+				complemento = scanner.nextLine();
+				if (complemento.equals("")) {
+					complemento = "não informado";
+					break;
+				}
+			}
+
+			endereco = new Endereco(cep, logradouro, numero, cidade, complemento);
+			enderecos.add(endereco);
+
+			paciente = new Paciente(nome, cpf, rg, endereco.getId(), telefone, email, NivelAcesso.values()[nivelAcesso],
+					dataNascimento, Genero.values()[genero], TipoSanguineo.values()[tipoSanguineo], fumante);
+			System.out.println("\n-> Paciente cadastrado com sucesso!");
+		}
+
+		voltarMenu();
 	}
 
 	// método para visualizar os pacientes cadastrados
-	public void visualizarPacientes() {
+	public void visualizarPaciente() {
 
-	}
+		System.out.println("11. Visualizar Paciente: \n");
+		System.out.println("- " + paciente);
 
-	// método para cadastrar os dados de um evento
-	public void cadastrarEventos() {
-
-	}
-
-	// método para visualizar os eventos cadastrados
-	public void visualizarEventos() {
-
-	}
-
-	// método para cadastrar os dados de um registro
-	public void cadastrarRegistros() {
-
-	}
-
-	// método para visualizar os registros cadastrados
-	public void visualizarRegistros() {
-
+		voltarMenu();
 	}
 
 	public static void main(String[] args) {
 		App app = new App();
+		// app.inicializarDados();
 		app.menu();
 	}
 

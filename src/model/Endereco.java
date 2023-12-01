@@ -75,6 +75,11 @@ public class Endereco {
 		return cidade;
 	}
 
+	// Método para verificar se o cep é válido
+	public static boolean verificaCep(String cep) {
+		return cep != null && cep.length() == 8;
+	}
+
 	// Método set para atributo cidade
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
