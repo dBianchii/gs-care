@@ -1,5 +1,7 @@
 package model;
 
+import enums.NivelAcesso;
+
 public class Profissional extends Cuidador {
 	private int idEmpresa;
 

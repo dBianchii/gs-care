@@ -48,7 +48,14 @@ public class App {
 				tipoSanguineo, fumante);
 	}
 
+	// limpar a tela
+	public void limparTela() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
 	public void menu() {
+		limparTela();
 		System.out.println("-------------------------------------");
 		System.out.println("\s* * * * * * * HAPCARE * * * * * * *");
 		System.out.println("-------------------------------------\n");
@@ -136,7 +143,7 @@ public class App {
 
 	// método para visualizar os produtos da HapCare
 	public void visualizarProdutos() {
-		System.out.println("1. Visualizar Produtos: \n");
+		System.out.println("\n1. Visualizar Produtos: \n");
 
 		for (Produto produto : produtos) {
 			System.out.println("\s\s " + produto.getId() + " - " + produto.getNome().toUpperCase());
@@ -148,7 +155,7 @@ public class App {
 
 	// método para escolher o produto
 	public void escolherProduto() {
-		System.out.println("2. Escolher Produto: \n");
+		System.out.println("\n2. Escolher Produto: \n");
 
 		while (true) {
 			System.out.print("Digite o número do produto desejado: ");
@@ -174,7 +181,7 @@ public class App {
 
 	// método para visualizar o produto escolhido
 	public void visualizarProdutoEscolhido() {
-		System.out.println("3. Visualizar Produto Escolhido: \n");
+		System.out.println("\n3. Visualizar Produto Escolhido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 		} else {
@@ -192,7 +199,7 @@ public class App {
 		String validadeAno;
 		int cvv;
 
-		System.out.println("4. Cadastrar Cartão de Crédito: \n");
+		System.out.println("\n4. Cadastrar Cartão de Crédito: \n");
 
 		while (true) {
 			System.out.print("• Número do cartão (16 dígitos): ");
@@ -236,7 +243,7 @@ public class App {
 
 		while (true) {
 			System.out.print("• CVV (3 dígitos): ");
-			cvv = scanner.nextInt();
+			cvv = Integer.parseInt(scanner.nextLine());
 			if (CartaoCredito.verificaCvv(cvv)) {
 				break;
 			} else {
@@ -252,12 +259,12 @@ public class App {
 
 	// método para visualizar os cartões de crédito cadastrados
 	public void visualizarCartoesCadastrados() {
-		System.out.println("5. Visualizar Cartões de Crédito Cadastrados: \n");
+		System.out.println("\n5. Visualizar Cartões de Crédito Cadastrados: \n");
 		if (cartoes.size() == 0) {
 			System.out.println("Você ainda não cadastrou nenhum cartão de crédito.");
 		} else {
 			for (CartaoCredito cartao : cartoes) {
-				System.out.println("\s\s " + cartao);
+				System.out.println("- " + cartao);
 			}
 		}
 		voltarMenu();
@@ -265,7 +272,7 @@ public class App {
 
 	// método para fazer um pedido
 	public void fazerPedido() {
-		System.out.println("6. Fazer Pedido: \n");
+		System.out.println("\n6. Fazer Pedido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 			voltarMenu();
@@ -285,12 +292,12 @@ public class App {
 
 	// método para ver os pedidos
 	public void verPedidos() {
-		System.out.println("7. Ver Pedidos: \n");
+		System.out.println("\n7. Ver Pedidos: \n");
 		if (pedidos.size() == 0) {
 			System.out.println("Você ainda não fez nenhum pedido.");
 		} else {
 			for (Pedido pedido : pedidos) {
-				System.out.println("\s\s " + pedido);
+				System.out.println("- " + pedido);
 			}
 		}
 		voltarMenu();
@@ -305,8 +312,8 @@ public class App {
 		int idEndereco = 1;
 		String telefone;
 		String email;
-		NivelAcesso nivelAcesso;
-		GrauParentesco grauParentesco = null;
+		int nivelAcesso;
+		int grauParentesco = -1;
 
 		System.out.println("8. Cadastrar Cuidador: \n");
 
@@ -335,11 +342,11 @@ public class App {
 				try {
 					opcao = Integer.parseInt(input);
 					if (opcao >= 0 && opcao <= GrauParentesco.values().length) {
-						grauParentesco = GrauParentesco.values()[opcao];
+						grauParentesco = opcao;
 						break; // exit the loop if input is within the valid range
 					} else
 						System.out.println(
-								"Por favor, escolha um número entre 0 e " + GrauParentesco.values().length + ".");
+								"Por favor, escolha um número entre 0 e " + (GrauParentesco.values().length - 1) + ".");
 				} catch (NumberFormatException e) {
 					System.out.println("Opção inválida! Por favor, insira um número.");
 				}
@@ -421,20 +428,23 @@ public class App {
 						break; // exit the loop if input is within the valid range
 					else
 						System.out
-								.println("Por favor, escolha um número entre 0 e " + NivelAcesso.values().length + ".");
+								.println("Por favor, escolha um número entre 0 e " + (NivelAcesso.values().length - 1) + ".");
 				} catch (NumberFormatException e) {
 					System.out.println("Opção inválida! Por favor, insira um número.");
 				}
 			}
-			nivelAcesso = NivelAcesso.values()[opcao];
+			nivelAcesso = opcao;
 			break;
 		}
 
-		// new Familiar(nome, cpf, rg, idEndereco, telefone, email, null,
-		// GrauParentesco.valueOf(grauParentesco.toString()), idPaciente);
+		if (familiar) {
+			cuidadores.add(new Familiar(nome, cpf, rg, idEndereco, telefone, email, NivelAcesso.values()[nivelAcesso], GrauParentesco.values()[grauParentesco], idPaciente));
+			System.out.println("- Cuidador Familiar cadastrado com sucesso!");
+		} else {
 
-		System.out.println(nivelAcesso);
-		System.out.println(grauParentesco);
+		}
+
+		
 		voltarMenu();
 	}
 
@@ -447,12 +457,7 @@ public class App {
 		} else {
 			System.out.println("Cuidadores: ");
 			for (Cuidador cuidador : cuidadores) {
-				System.out.println("\s\s " + cuidador);
-			}
-			System.out.println("\n");
-			System.out.println("Familiares: ");
-			for (Familiar familiar : familiares) {
-				System.out.println("\s\s " + familiar);
+				System.out.println("- " + cuidador);
 			}
 		}
 

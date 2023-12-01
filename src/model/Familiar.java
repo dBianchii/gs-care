@@ -1,6 +1,7 @@
 package model;
 
 import enums.GrauParentesco;
+import enums.NivelAcesso;
 
 public class Familiar extends Cuidador {
 	private GrauParentesco grauParentesco;
