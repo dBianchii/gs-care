@@ -221,11 +221,16 @@ public class App {
 
 		while (true) {
 			System.out.print("• CVV (3 dígitos): ");
-			cvv = scanner.nextInt();
-			if (CartaoCredito.verificaCvv(cvv)) {
-				break;
-			} else {
-				System.out.println("☒ CVV inválido. Tente novamente.\n");
+			String cvvInput = scanner.nextLine();
+			try {
+				cvv = Integer.parseInt(cvvInput);
+				if (CartaoCredito.verificaCvv(cvv)) {
+					break;
+				} else {
+					System.out.println("☒ CVV inválido. Tente novamente.\n");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("☒ Insira um número válido para o CVV.");
 			}
 		}
 		CartaoCredito cartao = new CartaoCredito(numero, nomeTitular, validadeMes, validadeAno, cvv);
@@ -253,19 +258,18 @@ public class App {
 		System.out.println("6. Fazer Pedido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
-			voltarMenu();
-		} else if (cartoes.size() == 0) {
+		} else if (cartoes.isEmpty()) {
 			System.out.println("Você ainda não cadastrou nenhum cartão de crédito.");
-			voltarMenu();
+			return;
 		} else {
-			System.out.println("-> Você escolheu o "
-					+ produtos.get(idProdutoEscolhido) + ".\n");
-			System.out.println("-> Você cadastrou o cartão final "
-					+ cartoes.get(cartoes.size() - 1).getNumero().substring(12) + ".\n");
+			// int idPaciente = escolherPaciente();
+			int idCartao = escolherCartaoDeCredito();
+
+			pedidos.add(new Pedido(idCartao, 1, 1));
+
 			System.out.println("-> Pedido realizado com sucesso!\n");
-			pedidos.add(new Pedido(produtos.get(idProdutoEscolhido), cartoes.get(cartoes.size() - 1)));
-			voltarMenu();
 		}
+		voltarMenu();
 	}
 
 	// método para ver os pedidos
@@ -312,4 +316,43 @@ public class App {
 		App app = new App();
 		app.menu();
 	}
+
+	// ------------------------- HELPERS ----------------------------------- //
+	// Os métodos abaixo são apenas funções helpers para o resto do programa //
+	// --------------------------------------------------------------------- //
+
+	private int escolherCartaoDeCredito() {
+		if (cartoes.isEmpty()) {
+			System.out.println("Não há cartões de crédito cadastrados.");
+			return -1; // Indicate that no selection was made
+		}
+
+		System.out.println("Escolha um cartão de crédito:");
+
+		// List all cartões with an index
+		for (int i = 0; i < cartoes.size(); i++) {
+			CartaoCredito cartao = cartoes.get(i);
+			System.out.println((i + 1) + ". Cartão final " + cartao.getNumero().substring(cartao.getNumero().length() - 4));
+		}
+
+		int idCartao = -1;
+		while (true) {
+			System.out.print("Digite o número do cartão desejado: ");
+			String input = scanner.nextLine();
+			try {
+				idCartao = Integer.parseInt(input) - 1;
+
+				if (idCartao >= 0 && idCartao < cartoes.size()) {
+					break; // Valid index
+				} else {
+					System.out.println("Número inválido. Por favor, escolha um número entre 1 e " + cartoes.size() + ".");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Opção inválida! Por favor, insira um número.");
+			}
+		}
+
+		return idCartao;
+	}
+
 }
