@@ -1,20 +1,21 @@
 package view;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.CartaoCredito;
 import model.Cuidador;
-import model.Evento;
 import model.Familiar;
 import model.Paciente;
 import model.Pedido;
 import model.Pessoa;
 import model.Produto;
 import model.Registro;
-
+import enums.Genero;
 import enums.GrauParentesco;
 import enums.NivelAcesso;
+import enums.TipoSanguineo;
 
 public class App {
 	private final Scanner scanner = new Scanner(System.in);
@@ -31,8 +32,23 @@ public class App {
 
 	private int idProdutoEscolhido = -1;
 
-	public void menu() {
+	public void inicializarDados() {
+		String cpf = "12345678901";
+		String rg = "1234567890";
+		int idEndereco = 1; // TODO: uuuh.... ?
+		String telefone = "123456789";
+		String email = "joana@joana.com.br";
+		NivelAcesso nivelAcesso = NivelAcesso.LEITOR;
+		LocalDate dataNascimento = LocalDate.of(1990, 1, 1);
+		Genero genero = Genero.FEMININO;
+		TipoSanguineo tipoSanguineo = TipoSanguineo.A_POSITIVO;
+		Boolean fumante = false;
 
+		paciente = new Paciente("João", cpf, rg, idEndereco, telefone, email, nivelAcesso, dataNascimento, genero,
+				tipoSanguineo, fumante);
+	}
+
+	public void menu() {
 		System.out.println("-------------------------------------");
 		System.out.println("\s* * * * * * * HAPCARE * * * * * * *");
 		System.out.println("-------------------------------------\n");
@@ -475,6 +491,7 @@ public class App {
 
 	public static void main(String[] args) {
 		App app = new App();
+		app.inicializarDados();
 		app.menu();
 	}
 }

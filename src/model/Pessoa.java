@@ -1,10 +1,6 @@
 package model;
 
-enum NivelAcesso {
-	ADMINISTRADOR,
-	EDITOR,
-	LEITOR
-}
+import enums.NivelAcesso;
 
 public abstract class Pessoa {
 	private static int contador = 0;

@@ -2,22 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
-enum TipoSanguineo {
-	A_POSITIVO,
-	A_NEGATIVO,
-	B_POSITIVO,
-	B_NEGATIVO,
-	AB_POSITIVO,
-	AB_NEGATIVO,
-	O_POSITIVO,
-	O_NEGATIVO
-}
-
-enum Genero {
-	MASCULINO,
-	FEMININO,
-	OUTRO
-}
+import enums.Genero;
+import enums.NivelAcesso;
+import enums.TipoSanguineo;
 
 public class Paciente extends Pessoa {
 	private LocalDate dataNascimento;
@@ -77,7 +64,8 @@ public class Paciente extends Pessoa {
 		this.fumante = fumante;
 	}
 
-	// Método toString para impressão de dados (sobrescrito do método toString da classe Object)
+	// Método toString para impressão de dados (sobrescrito do método toString da
+	// classe Object)
 	@Override
 	public String toString() {
 		return "Paciente [dataNascimento=" + dataNascimento + ", genero=" + genero + ", tipoSanguineo=" + tipoSanguineo
