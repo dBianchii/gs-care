@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import enums.Genero;
 import enums.NivelAcesso;
@@ -32,6 +34,23 @@ public class Paciente extends Pessoa {
 	// Método set para atributo dataNascimento
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	// Método set para atributo dataNascimento (sobrecarga)
+	public static LocalDate setDataNascimento(String dataNascimento) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return LocalDate.parse(dataNascimento, formatter);
+	}
+
+	// Método para verificar se data de nascimento é válida
+	public static boolean verificaDataNascimento(String dataNascimento) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		try {
+			LocalDate.parse(dataNascimento, formatter);
+			return true;
+		} catch (DateTimeParseException e) {
+			return false;
+		}
 	}
 
 	// Método get para atributo genero
