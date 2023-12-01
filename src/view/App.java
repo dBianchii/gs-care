@@ -14,7 +14,6 @@ import model.Pedido;
 import model.Pessoa;
 import model.Produto;
 import model.Profissional;
-import model.Registro;
 import enums.Genero;
 import enums.GrauParentesco;
 import enums.NivelAcesso;
@@ -24,7 +23,6 @@ public class App {
 	private final Scanner scanner = new Scanner(System.in);
 
 	Paciente paciente;
-	int idPaciente = 1; // somente 1 paciente na aplicação
 
 	private ArrayList<Produto> produtos = Produto.criarProdutos();
 	private ArrayList<CartaoCredito> cartoes = new ArrayList<CartaoCredito>();
@@ -32,14 +30,12 @@ public class App {
 	private ArrayList<Cuidador> cuidadores = new ArrayList<Cuidador>();
 	private ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
 	private ArrayList<Empresa> empresas = new ArrayList<Empresa>();
-	private ArrayList<Registro> registros = new ArrayList<Registro>();
 
 	private int idProdutoEscolhido = -1;
 
 	public void inicializarDados() {
 		String cpf = "12345678901";
 		String rg = "1234567890";
-		int idEndereco = 1; // TODO: uuuh.... ?
 		String telefone = "123456789";
 		String email = "joana@joana.com.br";
 		NivelAcesso nivelAcesso = NivelAcesso.LEITOR;
@@ -48,7 +44,7 @@ public class App {
 		TipoSanguineo tipoSanguineo = TipoSanguineo.A_POSITIVO;
 		Boolean fumante = false;
 
-		paciente = new Paciente("João", cpf, rg, idEndereco, telefone, email, nivelAcesso, dataNascimento, genero,
+		paciente = new Paciente("João", cpf, rg, 1, telefone, email, nivelAcesso, dataNascimento, genero,
 				tipoSanguineo, fumante);
 	}
 
@@ -65,17 +61,17 @@ public class App {
 		System.out.println("-------------------------------------\n");
 		System.out.println("\nMENU PRINCIPAL");
 		System.out.println("-------------------------------------");
-		System.out.println("1. Visualizar Produtos");
-		System.out.println("2. Escolher Produto");
-		System.out.println("3. Visualizar Produto Escolhido");
-		System.out.println("4. Cadastrar Cartão de Crédito");
-		System.out.println("5. Visualizar Cartões de Crédito Cadastrados");
-		System.out.println("6. Fazer Pedido");
-		System.out.println("7. Ver Pedidos");
-		System.out.println("8. Cadastrar Cuidador");
-		System.out.println("9. Visualizar Cuidadores Cadastrados");
-		System.out.println("10. Cadastrar Paciente");
-		System.out.println("11. Visualizar Paciente");
+		System.out.println("1. Cadastrar Paciente");
+		System.out.println("2. Visualizar Paciente");
+		System.out.println("3. Visualizar Produtos");
+		System.out.println("4. Escolher Produto");
+		System.out.println("5. Visualizar Produto Escolhido");
+		System.out.println("6. Cadastrar Cartão de Crédito");
+		System.out.println("7. Visualizar Cartões de Crédito Cadastrados");
+		System.out.println("8. Fazer Pedido");
+		System.out.println("9. Ver Pedidos");
+		System.out.println("10. Cadastrar Cuidador");
+		System.out.println("11. Visualizar Cuidadores Cadastrados");
 		System.out.println("12. Sair");
 		System.out.println("-------------------------------------\n");
 		System.out.print("Escolha uma opção: ");
@@ -96,37 +92,37 @@ public class App {
 
 		switch (opcao) {
 			case 1:
-				visualizarProdutos();
-				break;
-			case 2:
-				escolherProduto();
-				break;
-			case 3:
-				visualizarProdutoEscolhido();
-				break;
-			case 4:
-				cadastrarCartaoDeCredito();
-				break;
-			case 5:
-				visualizarCartoesCadastrados();
-				break;
-			case 6:
-				fazerPedido();
-				break;
-			case 7:
-				verPedidos();
-				break;
-			case 8:
-				cadastrarCuidador();
-				break;
-			case 9:
-				visualizarCuidadores();
-				break;
-			case 10:
 				cadastrarPaciente();
 				break;
-			case 11:
+			case 2:
 				visualizarPaciente();
+				break;
+			case 3:
+				visualizarProdutos();
+				break;
+			case 4:
+				escolherProduto();
+				break;
+			case 5:
+				visualizarProdutoEscolhido();
+				break;
+			case 6:
+				cadastrarCartaoDeCredito();
+				break;
+			case 7:
+				visualizarCartoesCadastrados();
+				break;
+			case 8:
+				fazerPedido();
+				break;
+			case 9:
+				verPedidos();
+				break;
+			case 10:
+				cadastrarCuidador();
+				break;
+			case 11:
+				visualizarCuidadores();
 				break;
 			case 12:
 				System.out.println("\nObrigado por utilizar o HapCare!");
@@ -143,7 +139,7 @@ public class App {
 
 	// método para visualizar os produtos da HapCare
 	public void visualizarProdutos() {
-		System.out.println("\n1. Visualizar Produtos: \n");
+		System.out.println("\n3. Visualizar Produtos: \n");
 
 		for (Produto produto : produtos) {
 			System.out.println("\s\s " + produto.getId() + " - " + produto.getNome().toUpperCase());
@@ -155,7 +151,7 @@ public class App {
 
 	// método para escolher o produto
 	public void escolherProduto() {
-		System.out.println("\n2. Escolher Produto: \n");
+		System.out.println("\n4. Escolher Produto: \n");
 
 		while (true) {
 			System.out.print("Digite o número do produto desejado: ");
@@ -181,7 +177,7 @@ public class App {
 
 	// método para visualizar o produto escolhido
 	public void visualizarProdutoEscolhido() {
-		System.out.println("\n3. Visualizar Produto Escolhido: \n");
+		System.out.println("\n5. Visualizar Produto Escolhido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 		} else {
@@ -199,7 +195,7 @@ public class App {
 		String validadeAno;
 		int cvv;
 
-		System.out.println("\n4. Cadastrar Cartão de Crédito: \n");
+		System.out.println("\n6. Cadastrar Cartão de Crédito: \n");
 
 		while (true) {
 			System.out.print("• Número do cartão (16 dígitos): ");
@@ -264,7 +260,7 @@ public class App {
 
 	// método para visualizar os cartões de crédito cadastrados
 	public void visualizarCartoesCadastrados() {
-		System.out.println("\n5. Visualizar Cartões de Crédito Cadastrados: \n");
+		System.out.println("\n7. Visualizar Cartões de Crédito Cadastrados: \n");
 		if (cartoes.size() == 0) {
 			System.out.println("Você ainda não cadastrou nenhum cartão de crédito.");
 		} else {
@@ -277,7 +273,7 @@ public class App {
 
 	// método para fazer um pedido
 	public void fazerPedido() {
-		System.out.println("\n6. Fazer Pedido: \n");
+		System.out.println("\n8. Fazer Pedido: \n");
 		if (idProdutoEscolhido == -1) {
 			System.out.println("Você ainda não escolheu nenhum produto.");
 		} else if (cartoes.isEmpty()) {
@@ -290,7 +286,7 @@ public class App {
 			pedidos.add(new Pedido(idCartao, 1, 1));
 
 			System.out.println("-> Pedido realizado com sucesso!\n");
-			pedidos.add(new Pedido(idProdutoEscolhido, cartoes.get(cartoes.size() - 1).getId(), idPaciente));
+			pedidos.add(new Pedido(idProdutoEscolhido, cartoes.get(cartoes.size() - 1).getId(), paciente.getId()));
 			voltarMenu();
 		}
 		voltarMenu();
@@ -298,7 +294,7 @@ public class App {
 
 	// método para ver os pedidos
 	public void verPedidos() {
-		System.out.println("\n7. Ver Pedidos: \n");
+		System.out.println("\n9. Ver Pedidos: \n");
 		if (pedidos.size() == 0) {
 			System.out.println("Você ainda não fez nenhum pedido.");
 		} else {
@@ -311,6 +307,13 @@ public class App {
 
 	// método para cadastrar os dados de um cuidador
 	public void cadastrarCuidador() {
+
+		if (paciente == null) {
+			System.out.println("Você precisa cadastrar um paciente primeiro.");
+			voltarMenu();
+			return;
+		}
+
 		boolean familiar;
 		String nome;
 		String cpf;
@@ -331,7 +334,7 @@ public class App {
 		String complemento;
 		Endereco endereco;
 
-		System.out.println("8. Cadastrar Cuidador: \n");
+		System.out.println("10. Cadastrar Cuidador: \n");
 
 		while (true) {
 			System.out.print("• Você é familiar do paciente? (S/N) ");
@@ -521,7 +524,7 @@ public class App {
 		while (true) {
 			System.out.print("• Complemento: ");
 			complemento = scanner.nextLine();
-			if (complemento.equals("")) {
+			if (!complemento.equals("")) {
 				complemento = "não informado";
 				break;
 			}
@@ -533,11 +536,11 @@ public class App {
 		if (familiar) {
 			cuidadores.add(
 					new Familiar(nome, cpf, rg, endereco.getId(), telefone, email, NivelAcesso.values()[nivelAcesso],
-							GrauParentesco.values()[grauParentesco], idPaciente));
+							GrauParentesco.values()[grauParentesco], 1));
 			System.out.println("\n- Cuidador Familiar cadastrado com sucesso!");
 		} else {
 			cuidadores.add(new Profissional(nome, cpf, rg, endereco.getId(), telefone, email,
-					NivelAcesso.values()[nivelAcesso], idPaciente, empresa.getId()));
+					NivelAcesso.values()[nivelAcesso], paciente.getId(), empresa.getId()));
 			System.out.println("\n- Cuidador Profissional cadastrado com sucesso!");
 		}
 
@@ -547,7 +550,7 @@ public class App {
 	// método para visualizar os cuidadores cadastrados
 	public void visualizarCuidadores() {
 
-		System.out.println("9. Visualizar Cuidadores Cadastrados: \n");
+		System.out.println("11. Visualizar Cuidadores Cadastrados: \n");
 		if (cuidadores.size() == 0) {
 			System.out.println("Você ainda não cadastrou nenhum cuidador.");
 		} else {
@@ -581,7 +584,7 @@ public class App {
 		int tipoSanguineo;
 		Boolean fumante;
 
-		System.out.println("10. Cadastrar Paciente: \n");
+		System.out.println("1. Cadastrar Paciente: \n");
 
 		if (paciente != null) {
 			System.out.println("Você já cadastrou um paciente.");
@@ -779,13 +782,10 @@ public class App {
 				}
 			}
 
-			while (true) {
-				System.out.print("• Complemento: ");
-				complemento = scanner.nextLine();
-				if (complemento.equals("")) {
-					complemento = "não informado";
-					break;
-				}
+			System.out.print("• Complemento: ");
+			complemento = scanner.nextLine();
+			if (complemento.equals("")) {
+				complemento = "não informado";
 			}
 
 			endereco = new Endereco(cep, logradouro, numero, cidade, complemento);
@@ -802,8 +802,13 @@ public class App {
 	// método para visualizar os pacientes cadastrados
 	public void visualizarPaciente() {
 
-		System.out.println("11. Visualizar Paciente: \n");
-		System.out.println("- " + paciente);
+		System.out.println("2. Visualizar Paciente: \n");
+		if (paciente == null) {
+			System.out.println("Você ainda não cadastrou nenhum paciente.");
+		} else {
+
+			System.out.println("- " + paciente.toString());
+		}
 
 		voltarMenu();
 	}
