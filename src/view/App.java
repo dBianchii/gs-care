@@ -26,7 +26,7 @@ public class App {
 	private ArrayList<CartaoCredito> cartoes = new ArrayList<CartaoCredito>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 	private ArrayList<Cuidador> cuidadores = new ArrayList<Cuidador>();
-	private ArrayList<Evento> eventos = new ArrayList<Evento>();
+	private ArrayList<Familiar> familiares = new ArrayList<Familiar>();
 	private ArrayList<Registro> registros = new ArrayList<Registro>();
 
 	private int idProdutoEscolhido = -1;
@@ -47,13 +47,10 @@ public class App {
 		System.out.println("7. Ver Pedidos");
 		System.out.println("8. Cadastrar Cuidador");
 		System.out.println("9. Visualizar Cuidadores Cadastrados");
-		System.out.println("10. Cadastrar Paciente");
-		System.out.println("11. Visualizar Paciente");
-		System.out.println("12. Cadastrar Eventos");
-		System.out.println("13. Visualizar Eventos Cadastrados");
-		System.out.println("14. Cadastrar Registros");
-		System.out.println("15. Visualizar Registros Cadastrados");
-		System.out.println("16. Sair");
+		System.out.println("10. Visualizar Paciente");
+		System.out.println("11. Cadastrar Registro");
+		System.out.println("12. Visualizar Registros Cadastrados");
+		System.out.println("13. Sair");
 		System.out.println("-------------------------------------\n");
 		System.out.print("Escolha uma opção: ");
 
@@ -62,10 +59,10 @@ public class App {
 			String input = scanner.nextLine();
 			try {
 				opcao = Integer.parseInt(input);
-				if (opcao >= 1 && opcao <= 16)
+				if (opcao >= 1 && opcao <= 13)
 					break; // exit the loop if input is within the valid range
 				else
-					System.out.println("Por favor, escolha um número entre 1 e 16.");
+					System.out.println("Por favor, escolha um número entre 1 e 13.");
 			} catch (NumberFormatException e) {
 				System.out.println("Opção inválida! Por favor, insira um número.");
 			}
@@ -100,24 +97,15 @@ public class App {
 				visualizarCuidadores();
 				break;
 			case 10:
-				cadastrarPaciente();
-				break;
-			case 11:
 				visualizarPaciente();
 				break;
-			case 12:
-				cadastrarEventos();
-				break;
-			case 13:
-				visualizarEventos();
-				break;
-			case 14:
+			case 11:
 				cadastrarRegistros();
 				break;
-			case 15:
+			case 12:
 				visualizarRegistros();
 				break;
-			case 16:
+			case 13:
 				System.out.println("\nObrigado por utilizar o HapCare!");
 				System.exit(0);
 				break;
@@ -321,27 +309,27 @@ public class App {
 		}
 
 		if (familiar) {
-				System.out.println("• Informe o grau de parentesco do cuidador: ");
-				for (GrauParentesco grau : GrauParentesco.values()) {
-					System.out.println("\s\s" + grau.ordinal() + " - " + grau);
-				}
-				int opcao;
-				while (true) {
-					String input = scanner.nextLine();
-					try {
-						opcao = Integer.parseInt(input);
-						if (opcao >= 0 && opcao <= GrauParentesco.values().length) {
-							grauParentesco = GrauParentesco.values()[opcao];
-							break; // exit the loop if input is within the valid range
-						} else
-							System.out.println(
-									"Por favor, escolha um número entre 0 e " + GrauParentesco.values().length + ".");
-					} catch (NumberFormatException e) {
-						System.out.println("Opção inválida! Por favor, insira um número.");
-					}
-				}
-				
+			System.out.println("• Informe o grau de parentesco do cuidador: ");
+			for (GrauParentesco grau : GrauParentesco.values()) {
+				System.out.println("\s\s" + grau.ordinal() + " - " + grau);
 			}
+			int opcao;
+			while (true) {
+				String input = scanner.nextLine();
+				try {
+					opcao = Integer.parseInt(input);
+					if (opcao >= 0 && opcao <= GrauParentesco.values().length) {
+						grauParentesco = GrauParentesco.values()[opcao];
+						break; // exit the loop if input is within the valid range
+					} else
+						System.out.println(
+								"Por favor, escolha um número entre 0 e " + GrauParentesco.values().length + ".");
+				} catch (NumberFormatException e) {
+					System.out.println("Opção inválida! Por favor, insira um número.");
+				}
+			}
+
+		}
 
 		while (true) {
 			System.out.print("• Nome do Cuidador: ");
@@ -431,42 +419,58 @@ public class App {
 
 		System.out.println(nivelAcesso);
 		System.out.println(grauParentesco);
-
+		voltarMenu();
 	}
 
 	// método para visualizar os cuidadores cadastrados
 	public void visualizarCuidadores() {
 
-	}
+		System.out.println("9. Visualizar Cuidadores Cadastrados: \n");
+		if (familiares.size() == 0 && cuidadores.size() == 0) {
+			System.out.println("Você ainda não cadastrou nenhum cuidador.");
+		} else {
+			System.out.println("Cuidadores: ");
+			for (Cuidador cuidador : cuidadores) {
+				System.out.println("\s\s " + cuidador);
+			}
+			System.out.println("\n");
+			System.out.println("Familiares: ");
+			for (Familiar familiar : familiares) {
+				System.out.println("\s\s " + familiar);
+			}
+		}
 
-	// método para cadastrar os dados de um paciente
-	public void cadastrarPaciente() {
-
+		voltarMenu();
 	}
 
 	// método para visualizar os pacientes cadastrados
 	public void visualizarPaciente() {
 
-	}
+		System.out.println("10. Visualizar Paciente: \n");
+		System.out.println("Paciente: " + paciente);
 
-	// método para cadastrar os dados de um evento
-	public void cadastrarEventos() {
-
-	}
-
-	// método para visualizar os eventos cadastrados
-	public void visualizarEventos() {
-
+		voltarMenu();
 	}
 
 	// método para cadastrar os dados de um registro
 	public void cadastrarRegistros() {
 
+		voltarMenu();
 	}
 
 	// método para visualizar os registros cadastrados
 	public void visualizarRegistros() {
 
+		System.out.println("14. Visualizar Registros Cadastrados: \n");
+		if (registros.size() == 0) {
+			System.out.println("Você ainda não cadastrou nenhum registro.");
+		} else {
+			for (Registro registro : registros) {
+				System.out.println("\s\s " + registro);
+			}
+		}
+
+		voltarMenu();
 	}
 
 	public static void main(String[] args) {
