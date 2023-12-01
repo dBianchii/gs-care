@@ -32,6 +32,12 @@ public class Empresa {
 		this.cnpj = cnpj;
 	}
 
+	// Método que verifica se o cnpj é válido
+	public static boolean verificaCnpj(String numero) {
+		String numeros = numero.replaceAll("\\D", "");
+		return numeros.length() == 14 && numero.matches("[0-9]+");
+	}
+
 	// Método get para atributo razaoSocial
 	public String getRazaoSocial() {
 		return razaoSocial;
@@ -40,6 +46,12 @@ public class Empresa {
 	// Método set para atributo razaoSocial
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
+	}
+
+	// Método que verifica se a inscrição estadual é válida
+	public static boolean verificaInscricaoEstadual(String numero) {
+		String numeros = numero.replaceAll("\\D", "");
+		return numeros.length() == 12 && numero.matches("[0-9]+");
 	}
 
 	// Método get para atributo nomeFantasia
@@ -62,7 +74,8 @@ public class Empresa {
 		this.inscricaoEstadual = inscricaoEstadual;
 	}
 
-	// Método toString para impressão de dados (sobrescrito do método toString da classe Object)
+	// Método toString para impressão de dados (sobrescrito do método toString da
+	// classe Object)
 	@Override
 	public String toString() {
 		return "Empresa [id=" + id + ", cnpj=" + cnpj + ", razaoSocial=" + razaoSocial + ", nomeFantasia="

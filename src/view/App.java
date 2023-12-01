@@ -6,11 +6,14 @@ import java.util.Scanner;
 
 import model.CartaoCredito;
 import model.Cuidador;
+import model.Empresa;
+import model.Endereco;
 import model.Familiar;
 import model.Paciente;
 import model.Pedido;
 import model.Pessoa;
 import model.Produto;
+import model.Profissional;
 import model.Registro;
 import enums.Genero;
 import enums.GrauParentesco;
@@ -27,7 +30,8 @@ public class App {
 	private ArrayList<CartaoCredito> cartoes = new ArrayList<CartaoCredito>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 	private ArrayList<Cuidador> cuidadores = new ArrayList<Cuidador>();
-	private ArrayList<Familiar> familiares = new ArrayList<Familiar>();
+	private ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
+	private ArrayList<Empresa> empresas = new ArrayList<Empresa>();
 	private ArrayList<Registro> registros = new ArrayList<Registro>();
 
 	private int idProdutoEscolhido = -1;
@@ -309,11 +313,21 @@ public class App {
 		String nome;
 		String cpf;
 		String rg;
-		int idEndereco = 1;
 		String telefone;
 		String email;
 		int nivelAcesso;
 		int grauParentesco = -1;
+		String cnpj;
+		String razaoSocial;
+		String nomeFantasia;
+		String inscricaoEstadual;
+		Empresa empresa = null;
+		String cep;
+		String logradouro;
+		int numero = 0;
+		String cidade;
+		String complemento;
+		Endereco endereco;
 
 		System.out.println("8. Cadastrar Cuidador: \n");
 
@@ -351,7 +365,37 @@ public class App {
 					System.out.println("Opção inválida! Por favor, insira um número.");
 				}
 			}
+		}
 
+		if (!familiar) {
+			while (true) {
+				System.out.print("• CNPJ da Empresa (14 dígitos): ");
+				cnpj = scanner.nextLine();
+				if (Empresa.verificaCnpj(cnpj)) {
+					break;
+				} else {
+					System.out.println("☒ CNPJ inválido. Tente novamente.\n");
+				}
+			}
+
+			System.out.print("• Informe a razão social da Empresa: ");
+			razaoSocial = scanner.nextLine();
+
+			System.out.print("• Informe o nome fantasia da Empresa: ");
+			nomeFantasia = scanner.nextLine();
+
+			while (true) {
+				System.out.print("• Inscrição Estadual da Empresa (12 dígitos): ");
+				inscricaoEstadual = scanner.nextLine();
+				if (Empresa.verificaInscricaoEstadual(inscricaoEstadual)) {
+					break;
+				} else {
+					System.out.println("☒ Inscrição Estadual inválida. Tente novamente.\n");
+				}
+			}
+
+			empresa = new Empresa(cnpj, razaoSocial, nomeFantasia, inscricaoEstadual);
+			empresas.add(empresa);
 		}
 
 		while (true) {
@@ -383,16 +427,6 @@ public class App {
 				System.out.println("☒ RG inválido. Tente novamente.\n");
 			}
 		}
-
-		// while (true) {
-		// System.out.print("• ID do Endereço do Cuidador: ");
-		// idEndereco = scanner.nextInt();
-		// if (Pessoa.verificaIdEndereco(idEndereco)) {
-		// break;
-		// } else {
-		// System.out.println("☒ ID inválido. Tente novamente.\n");
-		// }
-		// }
 
 		while (true) {
 			System.out.print("• Telefone do Cuidador (de 8 a 13 dígitos): ");
@@ -428,7 +462,8 @@ public class App {
 						break; // exit the loop if input is within the valid range
 					else
 						System.out
-								.println("Por favor, escolha um número entre 0 e " + (NivelAcesso.values().length - 1) + ".");
+								.println("Por favor, escolha um número entre 0 e " + (NivelAcesso.values().length - 1)
+										+ ".");
 				} catch (NumberFormatException e) {
 					System.out.println("Opção inválida! Por favor, insira um número.");
 				}
@@ -437,14 +472,73 @@ public class App {
 			break;
 		}
 
-		if (familiar) {
-			cuidadores.add(new Familiar(nome, cpf, rg, idEndereco, telefone, email, NivelAcesso.values()[nivelAcesso], GrauParentesco.values()[grauParentesco], idPaciente));
-			System.out.println("- Cuidador Familiar cadastrado com sucesso!");
-		} else {
-
+		System.out.println("INFORMAÇÕES DO ENDEREÇO DO CUIDADOR:");
+		while (true) {
+			System.out.print("• CEP (8 dígitos): ");
+			cep = scanner.nextLine();
+			if (Endereco.verificaCep(cep)) {
+				break;
+			} else {
+				System.out.println("☒ CEP inválido. Tente novamente.\n");
+			}
 		}
 
-		
+		while (true) {
+			System.out.print("• Logradouro: ");
+			logradouro = scanner.nextLine();
+			if (!logradouro.equals("")) {
+				break;
+			} else {
+				System.out.println("☒ Logradouro inválido. Tente novamente.\n");
+			}
+		}
+
+
+		while (true) {
+			System.out.print("• Número: ");
+			try {
+				numero = Integer.parseInt(scanner.nextLine());
+				if (numero >= 0)
+					break; // exit the loop if input is within the valid range
+				else
+					System.out.println("Por favor, escolha um número positivo.");
+			} catch (NumberFormatException e) {
+				System.out.println("☒ Número inválido! Por favor, insira um número.");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Cidade: ");
+			cidade = scanner.nextLine();
+			if (!cidade.equals("")) {
+				break;
+			} else {
+				System.out.println("☒ Cidade inválida. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• Complemento: ");
+			complemento = scanner.nextLine();
+			if (complemento.equals("")) {
+				complemento = "não informado";
+				break;
+			}
+		}
+
+		endereco = new Endereco(cep, logradouro, numero, cidade, complemento);
+		enderecos.add(endereco);
+
+		if (familiar) {
+			cuidadores.add(new Familiar(nome, cpf, rg, endereco.getId(), telefone, email, NivelAcesso.values()[nivelAcesso],
+					GrauParentesco.values()[grauParentesco], idPaciente));
+			System.out.println("\n- Cuidador Familiar cadastrado com sucesso!");
+		} else {
+			cuidadores.add(new Profissional(nome, cpf, rg, endereco.getId(), telefone, email,
+					NivelAcesso.values()[nivelAcesso], idPaciente, empresa.getId()));
+			System.out.println("\n- Cuidador Profissional cadastrado com sucesso!");
+		}
+
 		voltarMenu();
 	}
 
@@ -452,7 +546,7 @@ public class App {
 	public void visualizarCuidadores() {
 
 		System.out.println("9. Visualizar Cuidadores Cadastrados: \n");
-		if (familiares.size() == 0 && cuidadores.size() == 0) {
+		if (cuidadores.size() == 0) {
 			System.out.println("Você ainda não cadastrou nenhum cuidador.");
 		} else {
 			System.out.println("Cuidadores: ");
