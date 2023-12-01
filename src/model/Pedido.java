@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 enum StatusPedido {
-	AGUARDANDO_PAGAMENTO,
+	AGUARDANDO_CONFIRMACAO_PAGAMENTO,
 	PAGAMENTO_APROVADO,
-	AGAMENTO_RECUSADO,
-	CANCELADO;
+	PAGAMENTO_RECUSADO,
+	PEDIDO_CANCELADO;
 }
 
 public class Pedido {
@@ -18,7 +18,7 @@ public class Pedido {
 	private int idProduto;
 	private LocalDate data = LocalDate.now();
 	private LocalTime hora = LocalTime.now();;
-	private StatusPedido status = StatusPedido.AGUARDANDO_PAGAMENTO;
+	private StatusPedido status = StatusPedido.AGUARDANDO_CONFIRMACAO_PAGAMENTO;
 
 	// Construtor da classe Pedido
 	public Pedido(int idCartao, int idProduto, int idPaciente) {

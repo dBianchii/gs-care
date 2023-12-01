@@ -6,19 +6,26 @@ import java.util.Scanner;
 import model.CartaoCredito;
 import model.Cuidador;
 import model.Evento;
+import model.Familiar;
 import model.Paciente;
 import model.Pedido;
+import model.Pessoa;
 import model.Produto;
 import model.Registro;
 
+import enums.GrauParentesco;
+import enums.NivelAcesso;
+
 public class App {
 	private final Scanner scanner = new Scanner(System.in);
+
+	Paciente paciente;
+	int idPaciente = 1; // somente 1 paciente na aplicação
 
 	private ArrayList<Produto> produtos = Produto.criarProdutos();
 	private ArrayList<CartaoCredito> cartoes = new ArrayList<CartaoCredito>();
 	private ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 	private ArrayList<Cuidador> cuidadores = new ArrayList<Cuidador>();
-	private ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 	private ArrayList<Evento> eventos = new ArrayList<Evento>();
 	private ArrayList<Registro> registros = new ArrayList<Registro>();
 
@@ -26,9 +33,9 @@ public class App {
 
 	public void menu() {
 
-		System.out.println("\n-------------------------------");
-		System.out.println("* * * * * * HAPCARE * * * * * *");
-		System.out.println("-------------------------------\n");
+		System.out.println("-------------------------------------");
+		System.out.println("\s* * * * * * * HAPCARE * * * * * * *");
+		System.out.println("-------------------------------------\n");
 		System.out.println("\nMENU PRINCIPAL");
 		System.out.println("-------------------------------------");
 		System.out.println("1. Visualizar Produtos");
@@ -40,12 +47,13 @@ public class App {
 		System.out.println("7. Ver Pedidos");
 		System.out.println("8. Cadastrar Cuidador");
 		System.out.println("9. Visualizar Cuidadores Cadastrados");
-		System.out.println("10. Visualizar Pacientes Cadastrados");
-		System.out.println("11. Cadastrar Eventos");
-		System.out.println("12. Visualizar Eventos Cadastrados");
-		System.out.println("13. Cadastrar Registros");
-		System.out.println("14. Visualizar Registros Cadastrados");
-		System.out.println("15. Sair");
+		System.out.println("10. Cadastrar Paciente");
+		System.out.println("11. Visualizar Paciente");
+		System.out.println("12. Cadastrar Eventos");
+		System.out.println("13. Visualizar Eventos Cadastrados");
+		System.out.println("14. Cadastrar Registros");
+		System.out.println("15. Visualizar Registros Cadastrados");
+		System.out.println("16. Sair");
 		System.out.println("-------------------------------------\n");
 		System.out.print("Escolha uma opção: ");
 
@@ -54,10 +62,10 @@ public class App {
 			String input = scanner.nextLine();
 			try {
 				opcao = Integer.parseInt(input);
-				if (opcao >= 1 && opcao <= 15)
+				if (opcao >= 1 && opcao <= 16)
 					break; // exit the loop if input is within the valid range
 				else
-					System.out.println("Por favor, escolha um número entre 1 e 15.");
+					System.out.println("Por favor, escolha um número entre 1 e 16.");
 			} catch (NumberFormatException e) {
 				System.out.println("Opção inválida! Por favor, insira um número.");
 			}
@@ -92,21 +100,24 @@ public class App {
 				visualizarCuidadores();
 				break;
 			case 10:
-				visualizarPacientes();
+				cadastrarPaciente();
 				break;
 			case 11:
-				cadastrarEventos();
+				visualizarPaciente();
 				break;
 			case 12:
-				visualizarEventos();
+				cadastrarEventos();
 				break;
 			case 13:
-				cadastrarRegistros();
+				visualizarEventos();
 				break;
 			case 14:
-				visualizarRegistros();
+				cadastrarRegistros();
 				break;
 			case 15:
+				visualizarRegistros();
+				break;
+			case 16:
 				System.out.println("\nObrigado por utilizar o HapCare!");
 				System.exit(0);
 				break;
@@ -192,7 +203,7 @@ public class App {
 		while (true) {
 			System.out.print("• Nome do Titular do Cartão: ");
 			nomeTitular = scanner.nextLine();
-			if (CartaoCredito.verificaNome(nomeTitular)) {
+			if (Pessoa.verificaNome(nomeTitular)) {
 				break;
 			} else {
 				System.out.println("☒ Nome inválido. Tente novamente.\n");
@@ -263,18 +274,163 @@ public class App {
 			System.out.println("-> Você cadastrou o cartão final "
 					+ cartoes.get(cartoes.size() - 1).getNumero().substring(12) + ".\n");
 			System.out.println("-> Pedido realizado com sucesso!\n");
-			pedidos.add(new Pedido(produtos.get(idProdutoEscolhido), cartoes.get(cartoes.size() - 1)));
+			pedidos.add(new Pedido(idProdutoEscolhido, cartoes.get(cartoes.size() - 1).getId(), idPaciente));
 			voltarMenu();
 		}
 	}
 
 	// método para ver os pedidos
 	public void verPedidos() {
-
+		System.out.println("7. Ver Pedidos: \n");
+		if (pedidos.size() == 0) {
+			System.out.println("Você ainda não fez nenhum pedido.");
+		} else {
+			for (Pedido pedido : pedidos) {
+				System.out.println("\s\s " + pedido);
+			}
+		}
+		voltarMenu();
 	}
 
 	// método para cadastrar os dados de um cuidador
 	public void cadastrarCuidador() {
+		boolean familiar;
+		String nome;
+		String cpf;
+		String rg;
+		int idEndereco = 1;
+		String telefone;
+		String email;
+		NivelAcesso nivelAcesso;
+		GrauParentesco grauParentesco = null;
+
+		System.out.println("8. Cadastrar Cuidador: \n");
+
+		while (true) {
+			System.out.print("• Você é familiar do paciente? (S/N) ");
+			String input = scanner.nextLine();
+			if (input.equalsIgnoreCase("S")) {
+				familiar = true;
+				break;
+			} else if (input.equalsIgnoreCase("N")) {
+				familiar = false;
+				break;
+			} else {
+				System.out.println("☒ Opção inválida. Tente novamente.\n");
+			}
+		}
+
+		if (familiar) {
+				System.out.println("• Informe o grau de parentesco do cuidador: ");
+				for (GrauParentesco grau : GrauParentesco.values()) {
+					System.out.println("\s\s" + grau.ordinal() + " - " + grau);
+				}
+				int opcao;
+				while (true) {
+					String input = scanner.nextLine();
+					try {
+						opcao = Integer.parseInt(input);
+						if (opcao >= 0 && opcao <= GrauParentesco.values().length) {
+							grauParentesco = GrauParentesco.values()[opcao];
+							break; // exit the loop if input is within the valid range
+						} else
+							System.out.println(
+									"Por favor, escolha um número entre 0 e " + GrauParentesco.values().length + ".");
+					} catch (NumberFormatException e) {
+						System.out.println("Opção inválida! Por favor, insira um número.");
+					}
+				}
+				
+			}
+
+		while (true) {
+			System.out.print("• Nome do Cuidador: ");
+			nome = scanner.nextLine();
+			if (Pessoa.verificaNome(nome)) {
+				break;
+			} else {
+				System.out.println("☒ Nome inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• CPF do Cuidador (11 dígitos): ");
+			cpf = scanner.nextLine();
+			if (Pessoa.verificaCpf(cpf)) {
+				break;
+			} else {
+				System.out.println("☒ CPF inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• RG do Cuidador (máx. 10 dígitos): ");
+			rg = scanner.nextLine();
+			if (Pessoa.verificaRg(rg)) {
+				break;
+			} else {
+				System.out.println("☒ RG inválido. Tente novamente.\n");
+			}
+		}
+
+		// while (true) {
+		// System.out.print("• ID do Endereço do Cuidador: ");
+		// idEndereco = scanner.nextInt();
+		// if (Pessoa.verificaIdEndereco(idEndereco)) {
+		// break;
+		// } else {
+		// System.out.println("☒ ID inválido. Tente novamente.\n");
+		// }
+		// }
+
+		while (true) {
+			System.out.print("• Telefone do Cuidador (de 8 a 13 dígitos): ");
+			telefone = scanner.nextLine();
+			if (Pessoa.verificaTelefone(telefone)) {
+				break;
+			} else {
+				System.out.println("☒ Telefone inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.print("• E-mail do Cuidador: ");
+			email = scanner.nextLine();
+			if (Pessoa.verificaEmail(email)) {
+				break;
+			} else {
+				System.out.println("☒ E-mail inválido. Tente novamente.\n");
+			}
+		}
+
+		while (true) {
+			System.out.println("• Informe o nível de acesso do cuidador: ");
+			for (NivelAcesso nivel : NivelAcesso.values()) {
+				System.out.println("\s\s" + nivel.ordinal() + " - " + nivel);
+			}
+			int opcao;
+			while (true) {
+				String input = scanner.nextLine();
+				try {
+					opcao = Integer.parseInt(input);
+					if (opcao >= 0 && opcao <= NivelAcesso.values().length)
+						break; // exit the loop if input is within the valid range
+					else
+						System.out
+								.println("Por favor, escolha um número entre 0 e " + NivelAcesso.values().length + ".");
+				} catch (NumberFormatException e) {
+					System.out.println("Opção inválida! Por favor, insira um número.");
+				}
+			}
+			nivelAcesso = NivelAcesso.values()[opcao];
+			break;
+		}
+
+		// new Familiar(nome, cpf, rg, idEndereco, telefone, email, null,
+		// GrauParentesco.valueOf(grauParentesco.toString()), idPaciente);
+
+		System.out.println(nivelAcesso);
+		System.out.println(grauParentesco);
 
 	}
 
@@ -283,8 +439,13 @@ public class App {
 
 	}
 
+	// método para cadastrar os dados de um paciente
+	public void cadastrarPaciente() {
+
+	}
+
 	// método para visualizar os pacientes cadastrados
-	public void visualizarPacientes() {
+	public void visualizarPaciente() {
 
 	}
 

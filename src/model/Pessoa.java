@@ -45,6 +45,11 @@ public abstract class Pessoa {
 		this.nome = nome;
 	}
 
+	// Método que verifica se o nome é válido
+	public static boolean verificaNome(String nomeTitular) {
+		return nomeTitular.matches("[a-zA-Z ]+");
+	}
+
 	// Método get para atributo cpf
 	public String getCpf() {
 		return cpf;
@@ -55,6 +60,12 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 
+	// Método que verifica se o cpf é válido
+	public static boolean verificaCpf(String cpf) {
+		String cpfNumeros = cpf.replaceAll("\\D", "");
+		return cpfNumeros.matches("\\d{11}");
+	}
+
 	// Método get para atributo rg
 	public String getRg() {
 		return rg;
@@ -63,6 +74,11 @@ public abstract class Pessoa {
 	// Método set para atributo rg
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	// Método que verifica se o rg é válido
+	public static boolean verificaRg(String rg) {
+		return rg.matches("[a-zA-Z0-9]{6,10}");
 	}
 
 	// Método get para atributo endereco
@@ -85,6 +101,12 @@ public abstract class Pessoa {
 		this.telefone = telefone;
 	}
 
+	// Método que verifica se o telefone é válido
+	public static boolean verificaTelefone(String telefone) {
+		String telefoneNumeros = telefone.replaceAll("\\D", "");
+		return telefoneNumeros.matches("\\d{8,13}");
+	}
+
 	// Método get para atributo email
 	public String getEmail() {
 		return email;
@@ -93,6 +115,11 @@ public abstract class Pessoa {
 	// Método set para atributo email
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	// Método que verifica se o email é válido
+	public static boolean verificaEmail(String email) {
+		return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
 	}
 
 	// Método get para atributo nivelAcesso

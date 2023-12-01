@@ -1,20 +1,6 @@
 package model;
 
-enum GrauParentesco {
-	PAI,
-	MAE,
-	IRMAO,
-	IRMA,
-	TIO,
-	TIA,
-	PRIMO,
-	PRIMA,
-	AVÔ,
-	AVÓ,
-	SOBRINHO,
-	SOBRINHA,
-	OUTRO
-}
+import enums.GrauParentesco;
 
 public class Familiar extends Cuidador {
 	private GrauParentesco grauParentesco;
